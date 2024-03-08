@@ -1,0 +1,33 @@
+import = ["~/.config/alacritty/themes/catppuccin-mocha.toml"]
+live_config_reload = true
+
+# [env]
+# TERM = "xterm-256color"
+
+[font]
+normal = { family = "JetBrainsMono Nerd Font" }
+bold = { family = "JetBrainsMono Nerd Font" }
+bold_italic = { family = "JetBrainsMono Nerd Font" }
+italic = { family = "JetBrainsMono Nerd Font" }
+builtin_box_drawing = true
+size = 15
+
+# CTRL-Space conflicts with MacOS key binding
+[[keyboard.bindings]]
+key = "Space"
+mods = "Alt"
+action = "ToggleViMode"
+
+[scrolling]
+history = 2000
+multiplier = 3
+
+[shell]
+program = "/bin/zsh"
+args = ["-l"]
+
+[window]
+opacity = 1.0
+option_as_alt = "Both"
+startup_mode = "Fullscreen"
+dynamic_padding = true
