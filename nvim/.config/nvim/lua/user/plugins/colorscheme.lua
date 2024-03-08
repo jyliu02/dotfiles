@@ -11,6 +11,7 @@ return {
                     gitsigns = true,
                     -- notify = true,
                     neogit = true,
+                    neotree = true,
                     which_key = true,
                     treesitter = true,
                     native_lsp = {

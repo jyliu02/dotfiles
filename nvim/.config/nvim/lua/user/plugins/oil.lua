@@ -5,13 +5,12 @@ return {
         if vim.fn.argc(-1) == 1 then
             local stat = vim.loop.fs_stat(vim.fn.argv(0))
             if stat and stat.type == "directory" then
-                require("lazy").load({ plugins = { "oil.nvim" } })
+                require("oil")
             end
         end
     end,
     opts = {
         use_default_keymaps = false,
-        lsp_rename_autosave = true,
         keymaps = {
             ["-"] = "actions.parent",
             ["q"] = "actions.close",
