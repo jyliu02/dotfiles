@@ -24,6 +24,13 @@ return {
             end,
             desc = "Buffer Explorer",
         },
+        {
+            "<leader>ce",
+            function()
+                require("neo-tree.command").execute({ source = "document_symbols", toggle = true })
+            end,
+            desc = "Symbol Explorer",
+        },
     },
     deactivate = function()
         vim.cmd([[Neotree close]])

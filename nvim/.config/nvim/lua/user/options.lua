@@ -31,7 +31,6 @@ vim.o.pumheight = 10
 vim.o.shortmess = "TIF"
 vim.o.undofile = true
 vim.o.cursorline = true
-vim.o.laststatus = 3 -- global status line
 
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0
