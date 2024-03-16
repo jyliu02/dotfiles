@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(fd . ~/ ~/Developer/ --type d --hidden -d 1 | fzf)
+    selected=$(fd . ~/ ~/Developer/ ~/Documents/ --type d --hidden -d 1 | fzf)
 fi
 
 if [[ -z $selected ]]; then

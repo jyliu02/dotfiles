@@ -105,23 +105,13 @@ return {
         keys = {
             {
                 "<C-l>",
-                function()
-                    return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next"
-                        or "<Plug>(neotab-out)"
-                end,
+                function() return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<Plug>(neotab-out)" end,
                 expr = true,
                 silent = true,
-                mode = { "i", "s" },
+                mode = "i",
             },
-            {
-                "<C-h>",
-                function()
-                    return require("luasnip").jumpable(-1) and "<Plug>luasnip-jump-prev"
-                end,
-                expr = true,
-                silent = true,
-                mode = { "i", "s" },
-            },
+            { "<C-l>", function() require("luasnip").jump(1) end, mode = "s" },
+            { "<C-h>", function() return require("luasnip").jump(-1) end, expr = true, silent = true, mode = { "i", "s" } },
         },
         opts = {
             history = true,

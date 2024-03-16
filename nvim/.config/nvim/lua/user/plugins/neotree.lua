@@ -43,6 +43,10 @@ return {
             follow_current_file = { enabled = true },
             use_libuv_file_watcher = true,
             filtered_items = {
+                always_show = {
+                    ".gitignore",
+                    ".config",
+                },
                 never_show = {
                     ".git",
                 },
