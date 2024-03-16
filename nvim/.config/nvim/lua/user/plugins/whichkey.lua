@@ -10,6 +10,7 @@ return {
             ["<leader>f"] = { name = "+file/find" },
             ["<leader>g"] = { name = "+git" },
             ["<leader>s"] = { name = "+search" },
+            ["<leader>v"] = { name = "+view" },
         },
     },
     config = function(_, opts)

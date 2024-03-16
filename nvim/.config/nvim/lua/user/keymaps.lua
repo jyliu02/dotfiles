@@ -25,10 +25,13 @@ keymap({ "n", "v" }, "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = t
 keymap("v", "<", "<gv")
 keymap("v", ">", ">gv")
 
-keymap("n", "<A-j>", "<cmd>m .+1<cr>==")
-keymap("n", "<A-k>", "<cmd>m .-2<cr>==")
-keymap("v", "<A-j>", ":m '>+1<cr>gv=gv")
-keymap("v", "<A-k>", ":m '<-2<cr>gv=gv")
+keymap("n", "J", "mzJ`z")
+
+keymap("n", "n", "nzzzv")
+keymap("n", "N", "Nzzzv")
+
+keymap("v", "J", ":m '>+1<cr>gv=gv")
+keymap("v", "K", ":m '<-2<cr>gv=gv")
 
 -- Sometimes interactive CLIs (like lazygit) need <Esc>
 keymap("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Enter Normal Mode" })
@@ -43,6 +46,7 @@ keymap("n", "<C-d>", "<C-d>zz")
 keymap("n", "<C-u>", "<C-u>zz")
 
 keymap("x", "<leader>p", "\"_dP")
+keymap({ "n", "v" }, "<leader>y", "\"+y")
 keymap({ "n", "v" }, "<leader>d", "\"_d")
 
 keymap("n", "[q", function()

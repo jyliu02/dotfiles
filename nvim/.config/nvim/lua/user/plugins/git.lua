@@ -20,12 +20,12 @@ return {
                 map("n", "]h", gs.next_hunk, "Next Hunk")
                 map("n", "[h", gs.prev_hunk, "Prev Hunk")
                 map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<cr>", "Stage Hunk")
-                map("n", "<leader>gu", gs.undo_stage_hunk, "Undo Stage Hunk")
                 map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<cr>", "Reset Hunk")
+                map("n", "<leader>gu", gs.undo_stage_hunk, "Undo Stage Hunk")
                 map("n", "<leader>gS", gs.stage_buffer, "Stage Buffer")
                 map("n", "<leader>gR", gs.reset_buffer, "Reset Buffer")
-                map("n", "<leader>gU", gs.reset_buffer_index, "Reset Buffer Index")
-                map("n", "<leader>gd", gs.preview_hunk, "Preview Diff")
+                map("n", "<leader>gU", gs.reset_buffer_index, "Unstage All Hunks")
+                map("n", "<leader>vd", gs.preview_hunk, "View Diff")
             end,
         },
     },
@@ -39,11 +39,11 @@ return {
         cmd = { "Neogit" },
         keys = {
             {
-                "<leader>go",
+                "<leader>G",
                 function()
-                    require("neogit").open({ kind = "split_above" })
+                    require("neogit").open({ kind = "split" })
                 end,
-                desc = "Open Neogit",
+                desc = "Neogit",
                 silent = true,
             },
         },
