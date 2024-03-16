@@ -13,6 +13,7 @@ return {
                     number = true,
                     relativenumber = true,
                     signcolumn = "yes:1",
+                    numberwidth = 4,
                 },
             },
         },
