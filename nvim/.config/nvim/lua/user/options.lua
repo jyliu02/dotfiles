@@ -24,8 +24,7 @@ vim.o.hidden = true
 vim.o.signcolumn = "yes:1"
 
 vim.o.timeout = true
-vim.o.timeoutlen = 300
-vim.o.updatetime = 250
+vim.o.updatetime = 50
 
 vim.o.pumheight = 10
 vim.o.shortmess = "TIF"

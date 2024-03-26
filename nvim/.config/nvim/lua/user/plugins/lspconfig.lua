@@ -5,23 +5,21 @@ return {
         -- stylua: ignore
         keys = {
             { "gd", "<cmd>Telescope lsp_definitions<CR>", desc = "Goto Definition", silent = true },
-            { "gi", "<cmd>Telescope lsp_implementations<cr>", desc = "Goto Implementation", silent = true },
-            { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References", silent = true },
             { "K", vim.lsp.buf.hover, desc = "Hover", silent = true },
             { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" } },
-            { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostic", silent = true },
             { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", silent = true },
-            { "<leader>cs", vim.lsp.buf.signature_help, desc = "Signature", silent = true },
+            { "vr", "<cmd>Telescope lsp_references<cr>", desc = "References", silent = true },
+            { "<leader>vs", vim.lsp.buf.signature_help, desc = "View Signature", silent = true },
+            { "<leader>vd", vim.diagnostic.open_float, desc = "View Diagnostic", silent = true },
             { "]d", vim.diagnostic.goto_next, desc = "Next Diagnostic", silent = true },
             { "[d", vim.diagnostic.goto_prev, desc = "Prev Diagnostic", silent = true },
         },
         config = function()
-            -- vim.api.nvim_set_hl(0, "LspInlayHint", { link = "CursorLine", default = false })
-
             vim.diagnostic.config({
                 underline = true,
             })
 
+            -- vim.api.nvim_set_hl(0, "LspInlayHint", { link = "CursorLine", default = false })
             -- local on_attach = function(client, buffer)
             --     -- Nvim inlayHint is kinda buggy, but anyways...
             --     if
@@ -57,24 +55,10 @@ return {
             nvim_lsp.pyright.setup({})
             nvim_lsp.gopls.setup({})
             nvim_lsp.taplo.setup({}) -- toml
-            nvim_lsp.ocamllsp.setup({})
+
+            -- nvim_lsp.clangd.setup({})
+            -- nvim_lsp.ocamllsp.setup({})
         end,
-    },
-    {
-        "tomtomjhj/coq-lsp.nvim", -- See also tomtomjhj/vscoq.nvim
-        event = "BufReadPre *.v", -- Load before BufRead to ensure correct file type detection
-        dependencies = {
-            { "neovim/nvim-lspconfig" },
-            {
-                "whonore/Coqtail",
-                init = function()
-                    -- Don't load Coqtail
-                    vim.g["loaded_coqtail"] = 1
-                    vim.g["coqtail#supported"] = 0
-                end,
-            },
-        },
-        config = true,
     },
     {
         "mrcjkb/rustaceanvim",
@@ -101,7 +85,6 @@ return {
                         require("lsp-inlayhints").on_attach(client, bufnr)
                     end,
                     default_settings = {
-                        -- rust-analyzer language server configuration
                         ["rust-analyzer"] = {
                             check = {
                                 allTargets = false,
@@ -115,4 +98,20 @@ return {
             }
         end,
     },
+    -- {
+    --     "tomtomjhj/coq-lsp.nvim", -- See also tomtomjhj/vscoq.nvim
+    --     event = "BufReadPre *.v", -- Load before BufRead to ensure correct file type detection
+    --     dependencies = {
+    --         { "neovim/nvim-lspconfig" },
+    --         {
+    --             "whonore/Coqtail",
+    --             init = function()
+    --                 -- Don't load Coqtail
+    --                 vim.g["loaded_coqtail"] = 1
+    --                 vim.g["coqtail#supported"] = 0
+    --             end,
+    --         },
+    --     },
+    --     config = true,
+    -- },
 }

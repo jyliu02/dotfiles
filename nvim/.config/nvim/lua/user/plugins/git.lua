@@ -25,7 +25,6 @@ return {
                 map("n", "<leader>gS", gs.stage_buffer, "Stage Buffer")
                 map("n", "<leader>gR", gs.reset_buffer, "Reset Buffer")
                 map("n", "<leader>gU", gs.reset_buffer_index, "Unstage All Hunks")
-                map("n", "<leader>vd", gs.preview_hunk, "View Diff")
             end,
         },
     },
