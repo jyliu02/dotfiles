@@ -11,26 +11,26 @@ return {
             desc = "Explorer NeoTree",
         },
         {
-            "<leader>ge",
-            function()
-                require("neo-tree.command").execute({ source = "git_status", toggle = true })
-            end,
-            desc = "Git Explorer",
-        },
-        {
-            "<leader>be",
-            function()
-                require("neo-tree.command").execute({ source = "buffers", toggle = true })
-            end,
-            desc = "Buffer Explorer",
-        },
-        {
             "<leader>ce",
             function()
                 require("neo-tree.command").execute({ source = "document_symbols", toggle = true })
             end,
             desc = "Symbol Explorer",
         },
+        -- {
+        --     "<leader>ge",
+        --     function()
+        --         require("neo-tree.command").execute({ source = "git_status", toggle = true })
+        --     end,
+        --     desc = "Git Explorer",
+        -- },
+        -- {
+        --     "<leader>be",
+        --     function()
+        --         require("neo-tree.command").execute({ source = "buffers", toggle = true })
+        --     end,
+        --     desc = "Buffer Explorer",
+        -- },
     },
     deactivate = function()
         vim.cmd([[Neotree close]])
@@ -76,17 +76,4 @@ return {
             },
         },
     },
-    -- config = function(_, opts)
-    --     local function on_move(data)
-    --         Util.lsp.on_rename(data.source, data.destination)
-    --     end
-    --
-    --     local events = require("neo-tree.events")
-    --     opts.event_handlers = opts.event_handlers or {}
-    --     vim.list_extend(opts.event_handlers, {
-    --         { event = events.FILE_MOVED, handler = on_move },
-    --         { event = events.FILE_RENAMED, handler = on_move },
-    --     })
-    --     require("neo-tree").setup(opts)
-    -- end,
 }

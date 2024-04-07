@@ -57,7 +57,6 @@ return {
             nvim_lsp.taplo.setup({}) -- toml
 
             -- nvim_lsp.clangd.setup({})
-            -- nvim_lsp.ocamllsp.setup({})
         end,
     },
     {
@@ -74,11 +73,6 @@ return {
             vim.g.rustaceanvim = {
                 inlay_hints = {
                     highlight = "NonText",
-                },
-                tools = {
-                    hover_actions = {
-                        auto_focus = true,
-                    },
                 },
                 server = {
                     on_attach = function(client, bufnr)
@@ -98,20 +92,4 @@ return {
             }
         end,
     },
-    -- {
-    --     "tomtomjhj/coq-lsp.nvim", -- See also tomtomjhj/vscoq.nvim
-    --     event = "BufReadPre *.v", -- Load before BufRead to ensure correct file type detection
-    --     dependencies = {
-    --         { "neovim/nvim-lspconfig" },
-    --         {
-    --             "whonore/Coqtail",
-    --             init = function()
-    --                 -- Don't load Coqtail
-    --                 vim.g["loaded_coqtail"] = 1
-    --                 vim.g["coqtail#supported"] = 0
-    --             end,
-    --         },
-    --     },
-    --     config = true,
-    -- },
 }

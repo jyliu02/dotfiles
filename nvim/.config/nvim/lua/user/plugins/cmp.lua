@@ -120,7 +120,7 @@ return {
     },
     {
         "Saecki/crates.nvim",
-        event = { "BufReadPre Cargo.toml" },
+        event = { "BufRead Cargo.toml" },
         dependencies = {
             {
                 "hrsh7th/nvim-cmp",
