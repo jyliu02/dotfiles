@@ -21,6 +21,7 @@ return {
                 map("n", "[h", gs.prev_hunk, "Prev Hunk")
                 map({ "n", "v" }, "<leader>gs", ":Gitsigns stage_hunk<cr>", "Stage Hunk")
                 map({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<cr>", "Reset Hunk")
+                map("n", "<leader>gp", gs.preview_hunk, "Preview Hunk")
                 map("n", "<leader>gu", gs.undo_stage_hunk, "Undo Stage Hunk")
                 map("n", "<leader>gS", gs.stage_buffer, "Stage Buffer")
                 map("n", "<leader>gR", gs.reset_buffer, "Reset Buffer")
@@ -31,8 +32,8 @@ return {
     {
         "NeogitOrg/neogit",
         dependencies = {
-            "nvim-lua/plenary.nvim", -- required
-            "sindrets/diffview.nvim", -- optional - Diff integration
+            "nvim-lua/plenary.nvim",         -- required
+            "sindrets/diffview.nvim",        -- optional - Diff integration
             "nvim-telescope/telescope.nvim", -- optional
         },
         cmd = { "Neogit" },

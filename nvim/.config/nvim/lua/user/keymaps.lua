@@ -12,8 +12,8 @@ vim.g.mapleader = " "
 
 keymap({ "n", "i" }, "<Esc>", "<cmd>noh<cr><esc>", { desc = "Clear Search Highlights" })
 
-keymap({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
-keymap("n", "<leader>q", ":qa<cr>", { desc = "Quit Neovim" })
+-- keymap({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+-- keymap("n", "<leader>q", ":qa<cr>", { desc = "Quit Neovim" })
 
 -- Better window navigation
 keymap({ "n", "v" }, "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })

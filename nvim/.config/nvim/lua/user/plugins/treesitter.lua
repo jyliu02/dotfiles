@@ -45,8 +45,10 @@ return {
                         lookahead = true,
                         -- stylua: ignore
                         keymaps = {
-                            ["am"] = "@function.outer", ["im"] = "@function.inner",
-                            ["ac"] = "@class.outer", ["ic"] = "@class.inner",
+                            ["am"] = "@function.outer",
+                            ["im"] = "@function.inner",
+                            ["ac"] = "@class.outer",
+                            ["ic"] = "@class.inner",
                         },
                     },
                 },

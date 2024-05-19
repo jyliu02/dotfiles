@@ -98,11 +98,6 @@ export LANG=en_US.UTF-8
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export PATH="/usr/local/opt/curl/bin:$PATH"
-export PATH="/usr/local/opt/python@3.10/bin:$PATH"
-export PATH="/Applications/CMake.app/Contents/bin":"$PATH"
-export PATH="~/.opam/default/bin:$PATH"
-export PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
 
 export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890
 
@@ -128,6 +123,3 @@ alias nvim="env TERM=alacritty nvim"
 
 alias xargs="xargs" # for alias to get expanded
 alias v="fd --type f --hidden --exclude .git | fzf-tmux -p --print0 | xargs -0 nvim"
-
-# opam configuration
-[[ ! -r /Users/aubreyliu/.opam/opam-init/init.zsh ]] || source /Users/aubreyliu/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
