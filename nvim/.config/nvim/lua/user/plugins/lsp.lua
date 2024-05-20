@@ -8,18 +8,22 @@ return {
         event = "VeryLazy",
         config = function()
             local on_attach = function(client, bufnr)
-                local opts = { buffer = bufnr, remap = false }
+                local map = function(modes, l, r, opts)
+                    opts = opts or {}
+                    opts.buffer = bufnr
+                    opts.remap = false
+                    vim.keymap.set(modes, l, r, opts)
+                end
 
-                vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-                vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
-                vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-                vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-                vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-                vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-                vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
-                vim.keymap.set("n", "<leader>cr", function() vim.lsp.buf.rename() end, opts)
-                vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-                vim.keymap.set("n", "<leader>vs", function() vim.lsp.buf.workspace_symbol() end, opts)
+                -- <C-w>d is the default mapping for viewing diagnostic under cursor
+                map("n", "K", function() vim.lsp.buf.hover() end, { desc = "Show Document" })
+                map("n", "gd", function() vim.lsp.buf.definition() end, { desc = "Goto Definition" })
+                map("n", "gr", function() vim.lsp.buf.references() end, { desc = "Goto References" })
+                map("n", "[d", function() vim.diagnostic.goto_next() end, { desc = "Prev Diagnostic" })
+                map("n", "]d", function() vim.diagnostic.goto_prev() end, { desc = "Next Diagnostic" })
+                map("n", "<leader>ca", function() vim.lsp.buf.code_action() end, { desc = "Code Actions" })
+                map("n", "<leader>cr", function() vim.lsp.buf.rename() end, { desc = "Rename Symbol" })
+                map("i", "<C-h>", function() vim.lsp.buf.signature_help() end, { desc = "Signature Help" })
 
                 vim.api.nvim_create_autocmd("BufWritePre", {
                     buffer = bufnr,
@@ -91,38 +95,25 @@ return {
         },
         opts = function()
             local cmp = require("cmp")
-            local default = require("cmp.config.default")()
 
             return {
                 mapping = {
-                    ["<C-n>"] = cmp.mapping({
-                        i = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-                        c = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
-                    }),
-                    ["<C-p>"] = cmp.mapping({
-                        i = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-                        c = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-                    }),
-                    ["<C-y>"] = cmp.mapping(cmp.mapping.confirm({ select = true }), { "i", "c" }),
-                    ["<C-Space>"] = cmp.mapping.complete(), -- invoke complete manually
+                    ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+                    ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+                    ["<C-y>"] = cmp.mapping.confirm({ select = true }),
                 },
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
                     { name = "path" },
-                }, {
                     { name = "buffer" },
                 }),
-                completion = {
-                    completeopt = "menu,menuone,noinsert",
-                },
-                sorting = default.sorting,
             }
         end,
         config = function(_, opts)
             local cmp = require("cmp")
             cmp.setup(opts)
             cmp.setup.cmdline(":", {
-                mapping = opts.mapping,
+                mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({
                     { name = "path" },
                 }, {
@@ -130,7 +121,7 @@ return {
                 }),
             })
             cmp.setup.cmdline({ "/", "?" }, {
-                mapping = opts.mapping,
+                mapping = cmp.mapping.preset.cmdline(),
                 sources = {
                     { name = "buffer" },
                 },

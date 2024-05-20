@@ -1,5 +1,6 @@
 return {
     "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
     dependencies = {
         "nvim-lua/plenary.nvim",
         { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -7,31 +8,30 @@ return {
     },
     cmd = { "Telescope" },
     keys = {
-        { "<leader>/",       "<cmd>Telescope live_grep<cr>",       desc = "Grep",           silent = true },
-        { "<leader>:",       "<cmd>Telescope command_history<cr>", desc = "Command History" },
-        { "<leader>;",       "<cmd>Telescope commands<cr>",        desc = "Commands" },
         { "<leader><Space>", "<cmd>Telescope<cr>",                 desc = "Telescope" },
-
+        { "<leader>;",       "<cmd>Telescope command_history<cr>", desc = "Command History" },
+        { "<leader>:",       "<cmd>Telescope commands<cr>",        desc = "Commands" },
+        -- TODO: Hidden files won't be shown with this command. Need to solve this.
+        { "<leader>/",       "<cmd>Telescope live_grep<cr>",       desc = "Grep" },
         {
             "<leader>ff",
             function()
-                if vim.loop.fs_stat(vim.loop.cwd() .. "/.git") then
-                    require("telescope.builtin").git_files { show_untracked = true }
+                local telescope = require("telescope.builtin")
+                if vim.uv.fs_stat(vim.uv.cwd() .. "/.git") then
+                    telescope.git_files { show_untracked = true }
                 else
-                    require("telescope.builtin").find_files { hidden = false }
+                    telescope.find_files { hidden = true }
                 end
             end,
             desc = "Find Files",
-            silent = true
         },
-        { "<leader>fr", "<cmd>Telescope oldfiles<cr>",                                 desc = "Recent Files",          silent = true },
-        { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers",               silent = true },
-
-        { "<leader>sh", "<cmd>Telescope help_tags<cr>",                                desc = "Help",                  silent = true },
-        { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>",                      desc = "Document Diagnostics",  silent = true },
-        { "<leader>sD", "<cmd>Telescope diagnostics<cr>",                              desc = "Workspace Diagnostics", silent = true },
-        { "<leader>ss", "<cmd>Telescope lsp_document_symbols<cr>",                     desc = "Document Symbols",      silent = true },
-        { "<leader>sS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",            desc = "Workspace Symbols",     silent = true },
+        { "<leader>fr", "<cmd>Telescope oldfiles<cr>",                                 desc = "Recent Files" },
+        { "<leader>fb", "<cmd>Telescope buffers sort_mru=true sort_lastused=true<cr>", desc = "Buffers" },
+        { "<leader>fh", "<cmd>Telescope help_tags<cr>",                                desc = "Help" },
+        { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>",                      desc = "Document Diagnostics" },
+        { "<leader>sD", "<cmd>Telescope diagnostics<cr>",                              desc = "Workspace Diagnostics" },
+        { "<leader>ss", "<cmd>Telescope lsp_document_symbols<cr>",                     desc = "Document Symbols" },
+        { "<leader>sS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",            desc = "Workspace Symbols" },
     },
     opts = function()
         local actions = require("telescope.actions")

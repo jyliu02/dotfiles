@@ -3,6 +3,7 @@ vim.o.relativenumber = true
 vim.o.shiftwidth = 4
 vim.o.tabstop = 4
 vim.o.expandtab = true
+vim.o.clipboard = "unnamedplus"
 
 vim.o.splitbelow = true
 vim.o.splitright = true
@@ -35,7 +36,3 @@ vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
-
--- if vim.fn.has("nvim-0.10") == 1 then
---     vim.o.termsync = false
--- end

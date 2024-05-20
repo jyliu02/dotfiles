@@ -4,6 +4,6 @@ return {
     cmd = "Spectre",
     opts = { open_cmd = "noswapfile vnew" },
     keys = {
-        { "<leader>sr", function() require("spectre").open() end, desc = "Replace (Spectre)" },
+        { "<leader>sr", function() require("spectre").open() end, desc = "Search/Replace" },
     },
 }

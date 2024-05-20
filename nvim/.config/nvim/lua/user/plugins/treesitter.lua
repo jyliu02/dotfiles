@@ -5,9 +5,6 @@ return {
         build = ":TSUpdate",
         dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
         config = function()
-            -- Looks better (especially with inlay hints)
-            vim.api.nvim_set_hl(0, "@variable", { link = "@parameter", default = false })
-
             local treesitter = require("nvim-treesitter.configs")
             treesitter.setup({
                 ensure_installed = {
@@ -20,8 +17,6 @@ return {
                     "markdown_inline",
                     "c",
                     "lua",
-                    "rust",
-                    "toml",
                 },
                 sync_install = false,
                 auto_install = true,
@@ -58,7 +53,6 @@ return {
     {
         "Wansmer/treesj",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
-        -- stylua: ignore
         keys = {
             { "<leader>cz", function() require("treesj").toggle() end, desc = "Toggle Scope" },
         },

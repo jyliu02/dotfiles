@@ -1,4 +1,4 @@
-local keymap = function(modes, l, r, opts)
+local map = function(modes, l, r, opts)
     opts = opts or {}
     if opts.silent == nil then
         opts.silent = true
@@ -6,58 +6,55 @@ local keymap = function(modes, l, r, opts)
     vim.keymap.set(modes, l, r, opts)
 end
 
+local try_with_msg = function(fn, msg)
+    local inner = function()
+        local status, _ = pcall(fn)
+        if not status then
+            print(msg)
+        end
+    end
+
+    return inner
+end
+
 -- Remap <Space> as <leader>
-keymap("", "<Space>", "<Nop>", { desc = "" })
+map("", "<Space>", "<Nop>", { desc = "" })
 vim.g.mapleader = " "
 
-keymap({ "n", "i" }, "<Esc>", "<cmd>noh<cr><esc>", { desc = "Clear Search Highlights" })
-
--- keymap({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
--- keymap("n", "<leader>q", ":qa<cr>", { desc = "Quit Neovim" })
+map({ "n", "i" }, "<Esc>", "<cmd>noh<cr><esc>", { desc = "Clear Search Highlights" })
 
 -- Better window navigation
-keymap({ "n", "v" }, "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
-keymap({ "n", "v" }, "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
-keymap({ "n", "v" }, "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
-keymap({ "n", "v" }, "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
+map({ "n", "v" }, "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
+map({ "n", "v" }, "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
+map({ "n", "v" }, "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
+map({ "n", "v" }, "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
 
 -- Better indenting
-keymap("v", "<", "<gv")
-keymap("v", ">", ">gv")
+map("v", "<", "<gv")
+map("v", ">", ">gv")
 
-keymap("n", "J", "mzJ`z")
+map("n", "J", "mzJ`z")
 
-keymap("n", "n", "nzzzv")
-keymap("n", "N", "Nzzzv")
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
 
-keymap("v", "J", ":m '>+1<cr>gv=gv")
-keymap("v", "K", ":m '<-2<cr>gv=gv")
+map("v", "J", ":m '>+1<cr>gv=gv")
+map("v", "K", ":m '<-2<cr>gv=gv")
 
 -- Sometimes interactive CLIs (like lazygit) need <Esc>
-keymap("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Enter Normal Mode" })
+map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Enter Normal Mode" })
 
-keymap({ "n", "v" }, "[b", "<cmd>bp<cr>", { desc = "Prev buffer" })
-keymap({ "n", "v" }, "]b", "<cmd>bn<cr>", { desc = "Next buffer" })
+map({ "n", "v" }, "[b", "<cmd>bp<cr>", { desc = "Prev buffer" })
+map({ "n", "v" }, "]b", "<cmd>bn<cr>", { desc = "Next buffer" })
 
-keymap({ "n", "v" }, "<leader>]", vim.cmd.tabnext, { desc = "Next Tab" })
-keymap({ "n", "v" }, "<leader>[", vim.cmd.tabprevious, { desc = "Previous Tab" })
+map({ "n", "v" }, "<leader>]", vim.cmd.tabnext, { desc = "Next Tab" })
+map({ "n", "v" }, "<leader>[", vim.cmd.tabprevious, { desc = "Previous Tab" })
 
-keymap("n", "<C-d>", "<C-d>zz")
-keymap("n", "<C-u>", "<C-u>zz")
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
 
-keymap("x", "<leader>p", "\"_dP")
-keymap({ "n", "v" }, "<leader>y", "\"+y")
-keymap({ "n", "v" }, "<leader>d", "\"_d")
+map("x", "<leader>p", "\"_dP")
+map({ "n", "v" }, "<leader>d", "\"_d")
 
-keymap("n", "[q", function()
-    local status, _ = pcall(vim.cmd.cprevious)
-    if not status then
-        print("No Previous Quickfix")
-    end
-end, { desc = "Previous Quickfix" })
-keymap("n", "]q", function()
-    local status, _ = pcall(vim.cmd.cnext)
-    if not status then
-        print("No Next Quickfix")
-    end
-end, { desc = "Next Quickfix" })
+map("n", "[q", try_with_msg(vim.cmd.cprev, "No Prev Quickfix"), { desc = "Previous Quickfix" })
+map("n", "]q", try_with_msg(vim.cmd.cnext, "No Next Quickfix"), { desc = "Next Quickfix" })
