@@ -24,7 +24,6 @@ return {
         opts = {
             symbol = "▏",
             options = { try_as_border = true },
-            -- stylua: ignore
             draw = { animation = function() return 0 end },
         },
         init = function()
@@ -75,67 +74,17 @@ return {
         end,
     },
     {
-        "folke/noice.nvim",
-        event = "VeryLazy",
-        dependencies = {
-            { "MunifTanjim/nui.nvim", lazy = true },
-        },
-        opts = {
-            lsp = {
-                progress = {
-                    enabled = true,
-                    view = "mini",
-                },
-                override = {
-                    ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                    ["vim.lsp.util.stylize_markdown"] = true,
-                    ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-                },
-            },
-            cmdline = { enabled = false },
-            messages = { enabled = false },
-            popupmenu = {
-                backend = "cmp",
-            },
-            views = {
-                mini = {
-                    timeout = 2000,
-                    position = {
-                        row = -1 - vim.o.cmdheight, -- flexible height
-                        col = "100%",
-                    },
-                },
-            },
-        },
-    },
-    {
         "nvim-tree/nvim-web-devicons",
         event = "VeryLazy",
-        opts = {
-            default = true,
-            strict = true,
-        },
     },
-    -- {
-    --     "folke/which-key.nvim",
-    --     -- enabled = false,
-    --     event = "VeryLazy",
-    --     opts = {
-    --         defaults = {
-    --             mode = { "n", "v" },
-    --             ["gs"] = { name = "+surround" },
-    --             ["<leader>b"] = { name = "+buffers" },
-    --             ["<leader>c"] = { name = "+code" },
-    --             ["<leader>f"] = { name = "+file/find" },
-    --             ["<leader>g"] = { name = "+git" },
-    --             ["<leader>s"] = { name = "+search" },
-    --             ["<leader>v"] = { name = "+view" },
-    --         },
-    --     },
-    --     config = function(_, opts)
-    --         local wk = require("which-key")
-    --         wk.setup(opts)
-    --         wk.register(opts.defaults)
-    --     end,
-    -- },
+    {
+        "j-hui/fidget.nvim", -- lsp progress
+        opts = {
+            progress = {
+                display = {
+                    render_limit = 8
+                }
+            }
+        }
+    }
 }
