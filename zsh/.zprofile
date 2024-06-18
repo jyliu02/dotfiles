@@ -8,7 +8,5 @@ export XDG_CONFIG_HOME=$HOME/.config
 
 add_to_path $HOME/.local/bin
 add_to_path $HOME/go/bin
-add_to_path $HOME/.zig-0.12.0
-add_to_path $HOME/.zig-0.13.0
-
+add_to_path $HOME/.local/share/nvim/mason/bin
 

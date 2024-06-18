@@ -3,7 +3,7 @@ return {
         "williamboman/mason-lspconfig",
         dependencies = {
             { "neovim/nvim-lspconfig" },
-            { "williamboman/mason.nvim" }
+            { "williamboman/mason.nvim" },
         },
         event = "VeryLazy",
         config = function()
@@ -16,21 +16,30 @@ return {
                 end
 
                 -- <C-w>d is the default mapping for viewing diagnostic under cursor
-                map("n", "K", function() vim.lsp.buf.hover() end, { desc = "Show Document" })
-                map("n", "gd", function() vim.lsp.buf.definition() end, { desc = "Goto Definition" })
-                map("n", "gr", function() vim.lsp.buf.references() end, { desc = "Goto References" })
-                map("n", "[d", function() vim.diagnostic.goto_next() end, { desc = "Prev Diagnostic" })
-                map("n", "]d", function() vim.diagnostic.goto_prev() end, { desc = "Next Diagnostic" })
-                map("n", "<leader>ca", function() vim.lsp.buf.code_action() end, { desc = "Code Actions" })
-                map("n", "<leader>cr", function() vim.lsp.buf.rename() end, { desc = "Rename Symbol" })
-                map("i", "<C-h>", function() vim.lsp.buf.signature_help() end, { desc = "Signature Help" })
-
-                vim.api.nvim_create_autocmd("BufWritePre", {
-                    buffer = bufnr,
-                    callback = function()
-                        vim.lsp.buf.format()
-                    end,
-                })
+                map("n", "K", function()
+                    vim.lsp.buf.hover()
+                end, { desc = "Show Document" })
+                map("n", "gd", function()
+                    vim.lsp.buf.definition()
+                end, { desc = "Goto Definition" })
+                map("n", "gr", function()
+                    vim.lsp.buf.references()
+                end, { desc = "Goto References" })
+                map("n", "[d", function()
+                    vim.diagnostic.goto_next()
+                end, { desc = "Prev Diagnostic" })
+                map("n", "]d", function()
+                    vim.diagnostic.goto_prev()
+                end, { desc = "Next Diagnostic" })
+                map("n", "<leader>ca", function()
+                    vim.lsp.buf.code_action()
+                end, { desc = "Code Actions" })
+                map("n", "<leader>cr", function()
+                    vim.lsp.buf.rename()
+                end, { desc = "Rename Symbol" })
+                map("i", "<C-h>", function()
+                    vim.lsp.buf.signature_help()
+                end, { desc = "Signature Help" })
 
                 if client.supports_method("textDocument/inlayHint") then
                     vim.lsp.inlay_hint.enable(true, nil)
@@ -42,7 +51,7 @@ return {
                 ensure_installed = { "lua_ls", "rust_analyzer" },
                 automatic_installation = true,
             })
-            require("mason-lspconfig").setup_handlers {
+            require("mason-lspconfig").setup_handlers({
                 function(server_name)
                     require("lspconfig")[server_name].setup({
                         on_attach = on_attach,
@@ -78,11 +87,37 @@ return {
                                     features = "all",
                                 },
                             },
-                        }
+                        },
                     })
                 end,
-            }
-        end
+            })
+        end,
+    },
+    {
+        "stevearc/conform.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+        opts = {
+            formatters_by_ft = {
+                lua = { "stylua" },
+            },
+            formatters = {
+                stylua = {
+                    prepend_args = {
+                        "--indent-type",
+                        "Spaces",
+                        "--quote-style",
+                        "ForceDouble",
+                        "--column-width",
+                        "100",
+                    },
+                },
+            },
+            format_on_save = {
+                -- These options will be passed to conform.format()
+                timeout_ms = 500,
+                lsp_format = "fallback",
+            },
+        },
     },
     {
         "hrsh7th/nvim-cmp",
@@ -98,9 +133,16 @@ return {
 
             return {
                 mapping = {
-                    ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-                    ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-                    ["<C-y>"] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
+                    ["<C-n>"] = cmp.mapping.select_next_item({
+                        behavior = cmp.SelectBehavior.Select,
+                    }),
+                    ["<C-p>"] = cmp.mapping.select_prev_item({
+                        behavior = cmp.SelectBehavior.Select,
+                    }),
+                    ["<C-y>"] = cmp.mapping.confirm({
+                        select = true,
+                        behavior = cmp.ConfirmBehavior.Replace,
+                    }),
                 },
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },

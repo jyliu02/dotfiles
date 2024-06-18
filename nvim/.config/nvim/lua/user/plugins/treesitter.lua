@@ -54,7 +54,13 @@ return {
         "Wansmer/treesj",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
         keys = {
-            { "<leader>cz", function() require("treesj").toggle() end, desc = "Toggle Scope" },
+            {
+                "<leader>cz",
+                function()
+                    require("treesj").toggle()
+                end,
+                desc = "Toggle Scope",
+            },
         },
         opts = {
             use_default_keymaps = false,
