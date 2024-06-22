@@ -23,11 +23,11 @@ vim.g.mapleader = " "
 
 map({ "n", "i" }, "<Esc>", "<cmd>noh<cr><esc>", { desc = "Clear Search Highlights" })
 
--- Better window navigation
--- map({ "n", "v" }, "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
--- map({ "n", "v" }, "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
--- map({ "n", "v" }, "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
--- map({ "n", "v" }, "<C-l>", "<C-w>l", { desc = "Go to Right Window", remap = true })
+-- Resize window faster
+map({ "n", "v" }, "<C-w>>", "<C-w>10>")
+map({ "n", "v" }, "<C-w><", "<C-w>10<")
+map({ "n", "v" }, "<C-w>-", "<C-w>10-")
+map({ "n", "v" }, "<C-w>+", "<C-w>10+")
 
 -- Better indenting
 map("v", "<", "<gv")

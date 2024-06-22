@@ -28,7 +28,6 @@ return {
                 incremental_selection = {
                     enable = true,
                     keymaps = {
-                        -- Don't have to use "init selction", just use any textobjects
                         node_incremental = "=",
                         node_decremental = "-",
                     },
@@ -38,12 +37,11 @@ return {
                     select = {
                         enable = true,
                         lookahead = true,
-                        -- stylua: ignore
                         keymaps = {
                             ["am"] = "@function.outer",
                             ["im"] = "@function.inner",
-                            ["ac"] = "@class.outer",
-                            ["ic"] = "@class.inner",
+                            -- ["ac"] = "@class.outer",
+                            -- ["ic"] = "@class.inner",
                         },
                     },
                 },
