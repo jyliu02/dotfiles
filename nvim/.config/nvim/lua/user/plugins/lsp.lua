@@ -18,52 +18,15 @@ return {
     },
     config = function()
       local on_attach = function(client, bufnr)
-        local map = function(modes, l, r, opts)
-          opts = opts or {}
-          opts.buffer = bufnr
-          opts.remap = false
-          vim.keymap.set(modes, l, r, opts)
-        end
-
         -- <C-w>d is the default mapping for viewing diagnostic under cursor
-        map("n", "K", function()
-          vim.lsp.buf.hover()
-        end, { desc = "Show Document" })
-        map("n", "gd", function()
-          vim.lsp.buf.definition()
-        end, { desc = "Goto Definition" })
-        map("n", "gr", function()
-          vim.lsp.buf.references()
-        end, { desc = "Goto References" })
-        map("n", "[d", function()
-          vim.diagnostic.goto_next()
-        end, { desc = "Prev Diagnostic" })
-        map("n", "]d", function()
-          vim.diagnostic.goto_prev()
-        end, { desc = "Next Diagnostic" })
-        map("n", "<leader>ca", function()
-          vim.lsp.buf.code_action()
-        end, { desc = "Code Actions" })
-        map("n", "<leader>cr", function()
-          vim.lsp.buf.rename()
-        end, { desc = "Rename Symbol" })
-        map("i", "<C-h>", function()
-          vim.lsp.buf.signature_help()
-        end, { desc = "Signature Help" })
-        map({ "i", "s" }, "<Tab>", function()
-          if vim.snippet.active({ direction = 1 }) then
-            vim.snippet.jump(1)
-          else
-            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", true)
-          end
-        end)
-        map({ "i", "s" }, "<S-Tab>", function()
-          if vim.snippet.active({ direction = -1 }) then
-            vim.snippet.jump(-1)
-          else
-            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<S-Tab>", true, false, true), "n", true)
-          end
-        end)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = 0 })
+        vim.keymap.set("n", "[d", vim.diagnostic.goto_next, { buffer = 0 })
+        vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, { buffer = 0 })
+        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = 0 })
+        vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { buffer = 0 })
+        vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, { buffer = 0 })
 
         if client.supports_method("textDocument/inlayHint") then
           vim.lsp.inlay_hint.enable(true, nil)
@@ -143,57 +106,6 @@ return {
       vim.keymap.set({ "n", "v" }, "<leader>cf", function()
         conform.format()
       end, { desc = "Formatting" })
-    end,
-  },
-  {
-    "hrsh7th/nvim-cmp",
-    event = { "InsertEnter", "CmdlineEnter" },
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
-    },
-    opts = function()
-      local cmp = require("cmp")
-
-      return {
-        mapping = {
-          ["<C-n>"] = cmp.mapping.select_next_item({
-            behavior = cmp.SelectBehavior.Select,
-          }),
-          ["<C-p>"] = cmp.mapping.select_prev_item({
-            behavior = cmp.SelectBehavior.Select,
-          }),
-          ["<C-y>"] = cmp.mapping.confirm({
-            select = true,
-            behavior = cmp.ConfirmBehavior.Replace,
-          }),
-        },
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "path" },
-          { name = "buffer" },
-        }),
-      }
-    end,
-    config = function(_, opts)
-      local cmp = require("cmp")
-      cmp.setup(opts)
-      cmp.setup.cmdline(":", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-          { name = "path" },
-        }, {
-          { name = "cmdline" },
-        }),
-      })
-      cmp.setup.cmdline({ "/", "?" }, {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-          { name = "buffer" },
-        },
-      })
     end,
   },
   {

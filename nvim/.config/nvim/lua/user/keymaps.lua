@@ -1,60 +1,33 @@
-local map = function(modes, l, r, opts)
-  opts = opts or {}
-  if opts.silent == nil then
-    opts.silent = true
-  end
-  vim.keymap.set(modes, l, r, opts)
-end
-
-local try = function(fn, msg)
-  local inner = function()
-    local status, _ = pcall(fn)
-    if not status then
-      print(msg)
-    end
-  end
-
-  return inner
-end
-
 -- Remap <Space> as <leader>
-map("", "<Space>", "<Nop>", { desc = "" })
+vim.keymap.set("", "<Space>", "<Nop>", { desc = "" })
 vim.g.mapleader = " "
 
-map({ "n", "i" }, "<Esc>", "<cmd>noh<cr><esc>", { desc = "Clear Search Highlights" })
+-- Clear search highlights
+vim.keymap.set({ "n", "i" }, "<Esc>", "<cmd>noh<cr><esc>")
 
 -- Resize window faster
-map({ "n", "v" }, "<C-w>>", "<C-w>10>")
-map({ "n", "v" }, "<C-w><", "<C-w>10<")
-map({ "n", "v" }, "<C-w>-", "<C-w>10-")
-map({ "n", "v" }, "<C-w>+", "<C-w>10+")
+vim.keymap.set({ "n", "v" }, "<C-w>>", "<C-w>10>")
+vim.keymap.set({ "n", "v" }, "<C-w><", "<C-w>10<")
+vim.keymap.set({ "n", "v" }, "<C-w>-", "<C-w>10-")
+vim.keymap.set({ "n", "v" }, "<C-w>+", "<C-w>10+")
 
 -- Better indenting
-map("v", "<", "<gv")
-map("v", ">", ">gv")
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
 
-map("n", "J", "mzJ`z")
+vim.keymap.set("n", "J", "mzJ`z")
 
-map("n", "n", "nzzzv")
-map("n", "N", "Nzzzv")
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
 
-map("v", "J", ":m '>+1<cr>gv=gv")
-map("v", "K", ":m '<-2<cr>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
 
--- Sometimes interactive CLIs (like lazygit) need <Esc>
-map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Enter Normal Mode" })
+vim.keymap.set({ "n", "v" }, "]t", vim.cmd.tabnext)
+vim.keymap.set({ "n", "v" }, "[t", vim.cmd.tabprevious)
 
-map({ "n", "v" }, "[b", "<cmd>bp<cr>", { desc = "Prev buffer" })
-map({ "n", "v" }, "]b", "<cmd>bn<cr>", { desc = "Next buffer" })
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
-map({ "n", "v" }, "]t", vim.cmd.tabnext, { desc = "Next Tab" })
-map({ "n", "v" }, "[t", vim.cmd.tabprevious, { desc = "Previous Tab" })
-
-map("n", "<C-d>", "<C-d>zz")
-map("n", "<C-u>", "<C-u>zz")
-
-map("x", "<leader>p", "\"_dP")
-map({ "n", "v" }, "<leader>d", "\"_d")
-
-map("n", "[q", try(vim.cmd.cprev, "No Prev Quickfix"), { desc = "Previous Quickfix" })
-map("n", "]q", try(vim.cmd.cnext, "No Next Quickfix"), { desc = "Next Quickfix" })
+vim.keymap.set("x", "<leader>p", "\"_dP")
+vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d")
