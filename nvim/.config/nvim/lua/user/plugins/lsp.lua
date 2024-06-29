@@ -1,11 +1,21 @@
 return {
     {
         "williamboman/mason-lspconfig",
+        event = "VeryLazy",
         dependencies = {
             { "neovim/nvim-lspconfig" },
             { "williamboman/mason.nvim" },
+            {
+                "j-hui/fidget.nvim", -- lsp progress
+                opts = {
+                    progress = {
+                        display = {
+                            render_limit = 8,
+                        },
+                    },
+                },
+            },
         },
-        event = "VeryLazy",
         config = function()
             -- stylua: ignore
             local on_attach = function(client, bufnr)
@@ -47,7 +57,7 @@ return {
 
             require("mason").setup()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "rust_analyzer" },
+                ensure_installed = { "lua_ls" },
                 automatic_installation = true,
             })
             require("mason-lspconfig").setup_handlers({
@@ -178,6 +188,21 @@ return {
         end,
     },
     {
+        "mfussenegger/nvim-lint",
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            local lint = require("lint")
+            lint.linters_by_ft = {
+                markdown = { "markdownlint" },
+            }
+            vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+                callback = function()
+                    require("lint").try_lint()
+                end,
+            })
+        end,
+    },
+    {
         "Saecki/crates.nvim",
         event = { "BufRead Cargo.toml" },
         dependencies = {
@@ -194,20 +219,5 @@ return {
                 cmp = { enabled = true },
             },
         },
-    },
-    {
-        "mfussenegger/nvim-lint",
-        event = "VeryLazy",
-        config = function()
-            local lint = require("lint")
-            lint.linters_by_ft = {
-                markdown = { "markdownlint" },
-            }
-            vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
-                callback = function()
-                    require("lint").try_lint()
-                end,
-            })
-        end,
     },
 }

@@ -18,8 +18,6 @@ return {
             ["<CR>"] = "actions.select",
             ["<Tab>"] = "actions.preview",
             ["<C-v>"] = "actions.select_vsplit",
-            ["<C-t>"] = "actions.select_tab",
-            ["<C-l>"] = "actions.refresh",
             ["g?"] = "actions.show_help",
             ["g."] = "actions.toggle_hidden",
             ["gs"] = "actions.change_sort",
