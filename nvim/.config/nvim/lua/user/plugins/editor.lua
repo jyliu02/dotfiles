@@ -22,6 +22,21 @@ return {
     end,
   },
   {
+    "nvim-pack/nvim-spectre",
+    build = false,
+    cmd = "Spectre",
+    opts = { open_cmd = "noswapfile vnew" },
+    keys = {
+      {
+        "<leader>sr",
+        function()
+          require("spectre").open()
+        end,
+        desc = "Search/Replace",
+      },
+    },
+  },
+  {
     "alexghergh/nvim-tmux-navigation",
     event = "VeryLazy",
     config = function()
