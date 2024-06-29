@@ -1,20 +1,20 @@
 local map = function(modes, l, r, opts)
-    opts = opts or {}
-    if opts.silent == nil then
-        opts.silent = true
-    end
-    vim.keymap.set(modes, l, r, opts)
+  opts = opts or {}
+  if opts.silent == nil then
+    opts.silent = true
+  end
+  vim.keymap.set(modes, l, r, opts)
 end
 
 local try = function(fn, msg)
-    local inner = function()
-        local status, _ = pcall(fn)
-        if not status then
-            print(msg)
-        end
+  local inner = function()
+    local status, _ = pcall(fn)
+    if not status then
+      print(msg)
     end
+  end
 
-    return inner
+  return inner
 end
 
 -- Remap <Space> as <leader>
