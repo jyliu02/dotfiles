@@ -6,7 +6,7 @@ local map = function(modes, l, r, opts)
     vim.keymap.set(modes, l, r, opts)
 end
 
-local try_with_msg = function(fn, msg)
+local try = function(fn, msg)
     local inner = function()
         local status, _ = pcall(fn)
         if not status then
@@ -47,8 +47,8 @@ map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Enter Normal Mode" })
 map({ "n", "v" }, "[b", "<cmd>bp<cr>", { desc = "Prev buffer" })
 map({ "n", "v" }, "]b", "<cmd>bn<cr>", { desc = "Next buffer" })
 
-map({ "n", "v" }, "<leader>]", vim.cmd.tabnext, { desc = "Next Tab" })
-map({ "n", "v" }, "<leader>[", vim.cmd.tabprevious, { desc = "Previous Tab" })
+map({ "n", "v" }, "]t", vim.cmd.tabnext, { desc = "Next Tab" })
+map({ "n", "v" }, "[t", vim.cmd.tabprevious, { desc = "Previous Tab" })
 
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
@@ -56,5 +56,5 @@ map("n", "<C-u>", "<C-u>zz")
 map("x", "<leader>p", "\"_dP")
 map({ "n", "v" }, "<leader>d", "\"_d")
 
-map("n", "[q", try_with_msg(vim.cmd.cprev, "No Prev Quickfix"), { desc = "Previous Quickfix" })
-map("n", "]q", try_with_msg(vim.cmd.cnext, "No Next Quickfix"), { desc = "Next Quickfix" })
+map("n", "[q", try(vim.cmd.cprev, "No Prev Quickfix"), { desc = "Previous Quickfix" })
+map("n", "]q", try(vim.cmd.cnext, "No Next Quickfix"), { desc = "Next Quickfix" })

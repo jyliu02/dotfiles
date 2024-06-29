@@ -7,6 +7,7 @@ return {
         },
         event = "VeryLazy",
         config = function()
+            -- stylua: ignore
             local on_attach = function(client, bufnr)
                 local map = function(modes, l, r, opts)
                     opts = opts or {}
@@ -16,30 +17,28 @@ return {
                 end
 
                 -- <C-w>d is the default mapping for viewing diagnostic under cursor
-                map("n", "K", function()
-                    vim.lsp.buf.hover()
-                end, { desc = "Show Document" })
-                map("n", "gd", function()
-                    vim.lsp.buf.definition()
-                end, { desc = "Goto Definition" })
-                map("n", "gr", function()
-                    vim.lsp.buf.references()
-                end, { desc = "Goto References" })
-                map("n", "[d", function()
-                    vim.diagnostic.goto_next()
-                end, { desc = "Prev Diagnostic" })
-                map("n", "]d", function()
-                    vim.diagnostic.goto_prev()
-                end, { desc = "Next Diagnostic" })
-                map("n", "<leader>ca", function()
-                    vim.lsp.buf.code_action()
-                end, { desc = "Code Actions" })
-                map("n", "<leader>cr", function()
-                    vim.lsp.buf.rename()
-                end, { desc = "Rename Symbol" })
-                map("i", "<C-h>", function()
-                    vim.lsp.buf.signature_help()
-                end, { desc = "Signature Help" })
+                map("n", "K", function() vim.lsp.buf.hover() end, { desc = "Show Document" })
+                map("n", "gd", function() vim.lsp.buf.definition() end, { desc = "Goto Definition" })
+                map("n", "gr", function() vim.lsp.buf.references() end, { desc = "Goto References" })
+                map("n", "[d", function() vim.diagnostic.goto_next() end, { desc = "Prev Diagnostic" })
+                map("n", "]d", function() vim.diagnostic.goto_prev() end, { desc = "Next Diagnostic" })
+                map("n", "<leader>ca", function() vim.lsp.buf.code_action() end, { desc = "Code Actions" })
+                map("n", "<leader>cr", function() vim.lsp.buf.rename() end, { desc = "Rename Symbol" })
+                map("i", "<C-h>", function() vim.lsp.buf.signature_help() end, { desc = "Signature Help" })
+                map({ "i", "s" }, "<Tab>", function()
+                    if vim.snippet.active { direction = 1 } then
+                        vim.snippet.jump(1)
+                    else
+                        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), 'n', true)
+                    end
+                end)
+                map({ "i", "s" }, "<S-Tab>", function()
+                    if vim.snippet.active { direction = -1 } then
+                        vim.snippet.jump(-1)
+                    else
+                        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<S-Tab>", true, false, true), 'n', true)
+                    end
+                end)
 
                 if client.supports_method("textDocument/inlayHint") then
                     vim.lsp.inlay_hint.enable(true, nil)
@@ -99,26 +98,33 @@ return {
         opts = {
             formatters_by_ft = {
                 lua = { "stylua" },
-                markdown = { "prettier" },
+                markdown = { { "prettierd", "prettier" }, "markdownlint" },
             },
             formatters = {
                 stylua = {
-                    prepend_args = {
-                        "--indent-type",
-                        "Spaces",
-                        "--quote-style",
-                        "ForceDouble",
-                        "--column-width",
-                        "100",
-                    },
+                    -- stylua: ignore
+                    prepend_args = { "--indent-type", "Spaces", "--quote-style", "ForceDouble", "--column-width", "100" },
                 },
             },
             format_on_save = {
-                -- These options will be passed to conform.format()
                 timeout_ms = 2000,
                 lsp_format = "fallback",
             },
+            format = {
+                timeout_ms = 2000,
+                async = false, -- not recommended to change
+                quiet = false, -- not recommended to change
+                lsp_format = "fallback", -- not recommended to change
+            },
         },
+        config = function(_, opts)
+            local conform = require("conform")
+            conform.setup(opts)
+
+            vim.keymap.set({ "n", "v" }, "<leader>cf", function()
+                conform.format()
+            end, { desc = "Formatting" })
+        end,
     },
     {
         "hrsh7th/nvim-cmp",
@@ -188,5 +194,20 @@ return {
                 cmp = { enabled = true },
             },
         },
+    },
+    {
+        "mfussenegger/nvim-lint",
+        event = "VeryLazy",
+        config = function()
+            local lint = require("lint")
+            lint.linters_by_ft = {
+                markdown = { "markdownlint" },
+            }
+            vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+                callback = function()
+                    require("lint").try_lint()
+                end,
+            })
+        end,
     },
 }

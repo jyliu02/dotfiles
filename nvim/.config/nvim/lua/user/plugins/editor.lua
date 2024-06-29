@@ -16,11 +16,7 @@ return {
             local plugin = require("lazy.core.config").spec.plugins["mini.surround"]
             local opts = require("lazy.core.plugin").values(plugin, "opts", false)
             local mappings = {
-                {
-                    opts.mappings.add,
-                    desc = "Add surrounding",
-                    mode = { "n", "v" },
-                },
+                { opts.mappings.add, desc = "Add surrounding", mode = { "n", "v" } },
                 { opts.mappings.delete, desc = "Delete surrounding" },
                 { opts.mappings.find, desc = "Find right surrounding" },
                 { opts.mappings.find_left, desc = "Find left surrounding" },
@@ -82,5 +78,48 @@ return {
                 todo = { "Constant" },
             },
         },
+    },
+    {
+        "alexghergh/nvim-tmux-navigation",
+        event = "VeryLazy",
+        config = function()
+            local nav = require("nvim-tmux-navigation")
+
+            nav.setup({
+                disable_when_zoomed = true,
+            })
+
+            vim.keymap.set({ "n", "v" }, "<C-h>", nav.NvimTmuxNavigateLeft)
+            vim.keymap.set({ "n", "v" }, "<C-j>", nav.NvimTmuxNavigateDown)
+            vim.keymap.set({ "n", "v" }, "<C-k>", nav.NvimTmuxNavigateUp)
+            vim.keymap.set({ "n", "v" }, "<C-l>", nav.NvimTmuxNavigateRight)
+        end,
+    },
+    {
+        "kevinhwang91/nvim-ufo",
+        dependencies = { "kevinhwang91/promise-async" },
+        event = "VeryLazy",
+        init = function()
+            vim.o.foldcolumn = "0" -- '0' is not bad
+            vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+            vim.o.foldlevelstart = 99
+            vim.o.foldenable = true
+        end,
+        config = function()
+            vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+            vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+            vim.cmd("hi! link UfoFoldedEllipsis Comment") -- No idea why I have to link this manually, but at least it works.
+
+            require("ufo").setup({
+                open_fold_hl_timeout = 0,
+                provider_selector = function(bufnr, filetype, buftype)
+                    if filetype == "markdown" then
+                        return { "treesitter", "indent" }
+                    else
+                        return { "lsp", "indent" }
+                    end
+                end,
+            })
+        end,
     },
 }
