@@ -1,7 +1,6 @@
 return {
   {
     "backdround/global-note.nvim",
-    event = "VeryLazy",
     keys = {
       { "<leader>g", "<cmd>GlobalNote<cr>", desc = "Toggle Global Note" },
     },

@@ -1,9 +1,6 @@
 return {
   { "tpope/vim-sleuth" },
-  {
-    "nvim-tree/nvim-web-devicons",
-    event = "VeryLazy",
-  },
+  { "nvim-tree/nvim-web-devicons" },
   {
     "echasnovski/mini.nvim",
     config = function()
@@ -13,9 +10,8 @@ return {
   },
   {
     "mbbill/undotree",
-    cmd = { "UndotreeToggle" },
     keys = {
-      { "<leader>u", "<cmd>UndotreeToggle<cr>", desc = "UndoTree", silent = true },
+      { "<leader>u", "<cmd>UndotreeToggle<cr>" },
     },
     init = function()
       vim.g.undotree_SetFocusWhenToggle = 1
@@ -23,18 +19,11 @@ return {
   },
   {
     "nvim-pack/nvim-spectre",
-    build = false,
     cmd = "Spectre",
-    opts = { open_cmd = "noswapfile vnew" },
     keys = {
-      {
-        "<leader>sr",
-        function()
-          require("spectre").open()
-        end,
-        desc = "Search/Replace",
-      },
+      { "<leader>S", "<cmd>Spectre<cr>" },
     },
+    opts = {},
   },
   {
     "alexghergh/nvim-tmux-navigation",

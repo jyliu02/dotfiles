@@ -20,7 +20,6 @@ return {
         },
         sync_install = false,
         auto_install = true,
-        indent = { enable = true },
         highlight = {
           enable = true,
           additional_vim_regex_highlighting = false, -- catppuccin requires this
@@ -37,12 +36,7 @@ return {
           select = {
             enable = true,
             lookahead = true,
-            keymaps = {
-              ["am"] = "@function.outer",
-              ["im"] = "@function.inner",
-              -- ["ac"] = "@class.outer",
-              -- ["ic"] = "@class.inner",
-            },
+            keymaps = { ["am"] = "@function.outer", ["im"] = "@function.inner" },
           },
         },
       })
@@ -52,13 +46,7 @@ return {
     "Wansmer/treesj",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     keys = {
-      {
-        "<leader>cz",
-        function()
-          require("treesj").toggle()
-        end,
-        desc = "Toggle Scope",
-      },
+      { "<leader>cz", "<cmd>TSJToggle<cr>" },
     },
     opts = {
       use_default_keymaps = false,

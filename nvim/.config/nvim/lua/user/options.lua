@@ -19,7 +19,6 @@ vim.opt.timeout = true
 vim.opt.updatetime = 250
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.smartindent = true
 vim.opt.showmode = false
 vim.opt.swapfile = false
 vim.opt.undofile = true

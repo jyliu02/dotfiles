@@ -119,7 +119,6 @@ alias grep=rg
 
 export EDITOR=nvim
 alias vim=nvim
-alias nvim="env TERM=alacritty nvim"
 
 alias xargs="xargs" # for alias to get expanded
 alias v="fd --type f --hidden --exclude .git | fzf-tmux -p --print0 | xargs -0 nvim"

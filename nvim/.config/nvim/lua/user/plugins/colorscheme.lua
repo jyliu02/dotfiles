@@ -7,12 +7,8 @@ return {
       require("catppuccin").setup({
         integrations = {
           cmp = true,
-          noice = true,
-          gitsigns = true,
-          -- notify = true,
           neogit = true,
-          neotree = true,
-          which_key = true,
+          gitsigns = true,
           treesitter = true,
           native_lsp = {
             enabled = true,
