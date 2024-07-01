@@ -1,6 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -62,7 +59,6 @@ fpath+=~/.zfunc
 plugins=(
     zsh-syntax-highlighting
     zsh-autosuggestions
-    tmux
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -122,3 +118,4 @@ alias vim=nvim
 
 alias xargs="xargs" # for alias to get expanded
 alias v="fd --type f --hidden --exclude .git | fzf-tmux -p --print0 | xargs -0 nvim"
+alias ts="~/.local/scripts/tmux-sessionizer"
