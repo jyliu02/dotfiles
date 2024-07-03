@@ -26,6 +26,7 @@ return {
       { "<leader>fr", builtin.oldfiles },
       { "<leader>fb", builtin.buffers },
       { "<leader>fh", builtin.help_tags },
+      { "<leader>fs", builtin.lsp_document_symbols },
     }
   end,
   config = function()

@@ -24,13 +24,6 @@ return {
           enable = true,
           additional_vim_regex_highlighting = false, -- catppuccin requires this
         },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            node_incremental = "=",
-            node_decremental = "-",
-          },
-        },
         textobjects = {
           enable = true,
           select = {
