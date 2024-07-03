@@ -33,7 +33,6 @@ ssh-add ~/.ssh/id_rsa 2> /dev/null
 
 alias grep=rg
 alias vim=nvim
-alias xargs="xargs" # for alias to get expanded
 alias v="fd --type f --hidden --exclude .git | fzf-tmux -p --print0 | xargs -0 nvim"
 alias ts="~/.local/scripts/tmux-sessionizer"
 
