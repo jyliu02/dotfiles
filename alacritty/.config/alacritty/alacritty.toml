@@ -14,7 +14,6 @@ action = "ToggleViMode"
 
 [scrolling]
 history = 2000
-multiplier = 3
 
 [shell]
 program = "/bin/zsh"

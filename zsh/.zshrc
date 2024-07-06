@@ -33,7 +33,6 @@ ssh-add ~/.ssh/id_rsa 2> /dev/null
 
 alias grep=rg
 alias vim=nvim
-alias v="fd --type f --hidden --exclude .git | fzf-tmux -p --print0 | xargs -0 nvim"
-alias ts="~/.local/scripts/tmux-sessionizer"
 
+source <(fzf --zsh)
 eval "$(zoxide init zsh)" # Better cd

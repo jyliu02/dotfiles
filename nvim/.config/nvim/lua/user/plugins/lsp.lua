@@ -91,21 +91,21 @@ return {
         timeout_ms = 2000,
         lsp_format = "fallback",
       },
-      format = {
-        timeout_ms = 2000,
-        async = false, -- not recommended to change
-        quiet = false, -- not recommended to change
-        lsp_format = "fallback", -- not recommended to change
-      },
+      -- format = {
+      --   timeout_ms = 2000,
+      --   async = false, -- not recommended to change
+      --   quiet = false, -- not recommended to change
+      --   lsp_format = "fallback", -- not recommended to change
+      -- },
     },
-    config = function(_, opts)
-      local conform = require("conform")
-      conform.setup(opts)
-
-      vim.keymap.set({ "n", "v" }, "<leader>cf", function()
-        conform.format()
-      end, { desc = "Formatting" })
-    end,
+    -- config = function(_, opts)
+    --   local conform = require("conform")
+    --   conform.setup(opts)
+    --
+    --   vim.keymap.set({ "n", "v" }, "<leader>cf", function()
+    --     conform.format()
+    --   end, { desc = "Formatting" })
+    -- end,
   },
   {
     "mfussenegger/nvim-lint",
