@@ -33,10 +33,7 @@ return {
       end
 
       require("mason").setup()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls" },
-        automatic_installation = true,
-      })
+      require("mason-lspconfig").setup()
       require("mason-lspconfig").setup_handlers({
         function(server_name)
           require("lspconfig")[server_name].setup({
@@ -91,21 +88,7 @@ return {
         timeout_ms = 2000,
         lsp_format = "fallback",
       },
-      -- format = {
-      --   timeout_ms = 2000,
-      --   async = false, -- not recommended to change
-      --   quiet = false, -- not recommended to change
-      --   lsp_format = "fallback", -- not recommended to change
-      -- },
     },
-    -- config = function(_, opts)
-    --   local conform = require("conform")
-    --   conform.setup(opts)
-    --
-    --   vim.keymap.set({ "n", "v" }, "<leader>cf", function()
-    --     conform.format()
-    --   end, { desc = "Formatting" })
-    -- end,
   },
   {
     "mfussenegger/nvim-lint",

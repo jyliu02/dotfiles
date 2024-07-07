@@ -24,8 +24,5 @@ vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
 vim.keymap.set("x", "<leader>p", "\"_dP")
 vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d")
 
-vim.keymap.set({ "n", "v" }, "]t", vim.cmd.tabnext)
-vim.keymap.set({ "n", "v" }, "[t", vim.cmd.tabprevious)
-
 vim.keymap.set("n", "[q", "<cmd>cprev<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "]q", "<cmd>cnext<cr>", { noremap = true, silent = true })
