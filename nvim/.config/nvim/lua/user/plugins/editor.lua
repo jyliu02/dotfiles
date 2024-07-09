@@ -1,5 +1,4 @@
 return {
-  { "tpope/vim-sleuth" },
   { "nvim-tree/nvim-web-devicons" },
   {
     "echasnovski/mini.nvim",
@@ -7,7 +6,7 @@ return {
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       require("mini.surround").setup()
       -- Auto-pairs
-      require("mini.pairs").setup()
+      -- require("mini.pairs").setup()
     end,
   },
   {
@@ -15,9 +14,6 @@ return {
     keys = {
       { "<leader>u", "<cmd>UndotreeToggle<cr>" },
     },
-    init = function()
-      vim.g.undotree_SetFocusWhenToggle = 1
-    end,
   },
   {
     "nvim-pack/nvim-spectre",

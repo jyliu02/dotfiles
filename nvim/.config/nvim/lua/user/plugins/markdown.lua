@@ -2,7 +2,7 @@ return {
   {
     "backdround/global-note.nvim",
     keys = {
-      { "<leader>g", "<cmd>GlobalNote<cr>", desc = "Toggle Global Note" },
+      { "<leader>w", "<cmd>GlobalNote<cr>" },
     },
     opts = {
       filename = "homepage.md",
