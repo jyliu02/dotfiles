@@ -11,7 +11,6 @@ return {
 
     return {
       { "<leader><leader>", builtin.builtin },
-      { "<leader>/", builtin.current_buffer_fuzzy_find },
       { "<leader>fg", builtin.live_grep },
       {
         "<leader>ff",
