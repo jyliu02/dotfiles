@@ -1,21 +1,13 @@
 return {
   {
     "williamboman/mason-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
+    event = "VeryLazy",
     build = ":MasonUpdate",
     dependencies = {
       { "neovim/nvim-lspconfig" },
       { "williamboman/mason.nvim" },
-      {
-        "j-hui/fidget.nvim", -- lsp progress
-        opts = {
-          progress = {
-            display = {
-              render_limit = 8,
-            },
-          },
-        },
-      },
+      -- lsp progress
+      { "j-hui/fidget.nvim", opts = { progress = { display = { render_limit = 8 } } } },
     },
     config = function()
       local on_attach = function(client, bufnr)
@@ -82,7 +74,7 @@ return {
     opts = {
       formatters_by_ft = {
         lua = { "stylua" },
-        markdown = { { "prettierd", "prettier" }, "markdownlint" },
+        markdown = { "prettier" },
       },
       format_on_save = {
         timeout_ms = 2000,
@@ -96,7 +88,7 @@ return {
     config = function()
       local lint = require("lint")
       lint.linters_by_ft = {
-        markdown = { "markdownlint" },
+        -- markdown = { "markdownlint" },
       }
       vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
         callback = function()

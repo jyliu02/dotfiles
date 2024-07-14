@@ -4,23 +4,18 @@ live_config_reload = true
 [font]
 normal = { family = "JetBrainsMono Nerd Font" }
 builtin_box_drawing = true
-size = 15
-
-# CTRL-Space conflicts with MacOS key binding
-[[keyboard.bindings]]
-key = "Space"
-mods = "Alt"
-action = "ToggleViMode"
+size = 10.5
 
 [scrolling]
 history = 2000
 
 [shell]
 program = "/bin/zsh"
-args = ["-l"]
+args = [
+    "-l",
+    "-c",
+    "tmux new-session -A -s main",
+]
 
 [window]
-opacity = 1.0
-option_as_alt = "Both"
-startup_mode = "Fullscreen"
 dynamic_padding = true
