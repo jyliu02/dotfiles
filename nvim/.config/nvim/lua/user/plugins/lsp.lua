@@ -82,37 +82,4 @@ return {
       },
     },
   },
-  {
-    "mfussenegger/nvim-lint",
-    event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      local lint = require("lint")
-      lint.linters_by_ft = {
-        -- markdown = { "markdownlint" },
-      }
-      vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
-        callback = function()
-          require("lint").try_lint()
-        end,
-      })
-    end,
-  },
-  {
-    "Saecki/crates.nvim",
-    event = { "BufRead Cargo.toml" },
-    dependencies = {
-      {
-        "hrsh7th/nvim-cmp",
-        opts = function(_, opts)
-          opts.sources = opts.sources or {}
-          table.insert(opts.sources, { name = "crates" })
-        end,
-      },
-    },
-    opts = {
-      src = {
-        cmp = { enabled = true },
-      },
-    },
-  },
 }

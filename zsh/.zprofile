@@ -9,6 +9,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 append_path $HOME/.local/bin
 append_path $HOME/go/bin
 append_path $HOME/.local/share/nvim/mason/bin
+append_path $HOME/.local/scripts
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then

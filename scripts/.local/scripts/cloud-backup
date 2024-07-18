@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+ROOT_DIR="/home/aubreyliu/OneDrive"
+
+# Prompt the user
+read -p "Do you want to run the sync script without --dry-run? (y/N): " response
+# Default to dry-run if no response or not 'y'
+if [[ "$response" == "y" || "$response" == "Y" ]]; then
+    rclone sync $ROOT_DIR OneDrive: -vPL --exclude '.**' --exclude 'sync'
+else
+    rclone sync $ROOT_DIR OneDrive: -vPL --exclude '.**' --exclude 'sync' --dry-run
+fi
+
