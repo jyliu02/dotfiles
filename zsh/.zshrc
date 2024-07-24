@@ -8,12 +8,6 @@ fi
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# Enable the Powerlevel10k theme
-source ~/.powerlevel10k/powerlevel10k.zsh-theme
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -71,16 +65,16 @@ source ~/.powerlevel10k/powerlevel10k.zsh-theme
 plugins=()
 
 source $ZSH/oh-my-zsh.sh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
 eval "$(ssh-agent -s)" &> /dev/null
 ssh-add ~/.ssh/id_ed25519_github &> /dev/null
+
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Set personal aliases, overriding those provided by Oh My Zsh libs,
 # plugins, and themes. Aliases can be placed here, though Oh My Zsh
@@ -96,6 +90,7 @@ ssh-add ~/.ssh/id_ed25519_github &> /dev/null
 alias grep=rg
 alias vim=nvim
 
+# load other tools
 source <(fzf --zsh)
-eval "$(zoxide init zsh)" # Better cd
+eval "$(zoxide init zsh)"
 
