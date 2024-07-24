@@ -7,7 +7,10 @@ pacman -Qqem > /etc/pkglist_aur.txt
 
 borg create -v --progress --compression zstd \
 --pattern='+/home/*/.cache/yay' \
---pattern='-/home/*/.cache' \
+--pattern='-/home/*/.cache/**' \
+--pattern='-/home/*/cache/**' \
+--pattern='-/home/*/Cache/**' \
+--pattern='-/home/*/__pycache__/**' \
 "$REPOSITORY::{hostname}-{now:%Y%m%d-%H%M}" /home /etc /var/cache/pacman/pkg;
 
 # Capture Borg exit status
@@ -23,5 +26,5 @@ fi
 
 sleep 3
 borg prune -v -s --list "$REPOSITORY" --keep-daily=7 --keep-weekly=4 --keep-monthly=3
-borg compact "$REPOSITORY"
+borg compact -v "$REPOSITORY"
 
