@@ -1,41 +1,27 @@
 #!/usr/bin/env bash
 
-REPOSITORY="/mnt/backup-usb/backup-repo"
+REPOSITORY="/mnt/backup/repo"
 
-echo "Dumping all installed packages ..."
-
-pacman -Qqen > /pkglist.txt
-pacman -Qqem > /pkglist_aur.txt
+pacman -Qqen > /etc/pkglist.txt
+pacman -Qqem > /etc/pkglist_aur.txt
 
 borg create -v --progress --compression zstd \
---exclude='/boot/*' \
---exclude='/dev/*' \
---exclude='/lost+found/*' \
---exclude='/mnt/*' \
---exclude='/proc/*' \
---exclude='/run/*' \
---exclude='/sys/*' \
---exclude='/tmp/*' \
---exclude='/media/*' \
---exclude='/var/log/*' \
---exclude='/var/lock/*' \
---exclude='/var/tmp/*' \
---exclude='**/.cache/**' \
---exclude='**/__pycache__' \
---pattern='+/var/cache/pacman/pkg' \
-"$REPOSITORY::{hostname}-{now:%Y%m%d-%H%M}" /
-
-sleep 3
-
-borg prune -v --list "$REPOSITORY" \
-    --keep-hourly=1 --keep-daily=3 --keep-weekly=2 --keep-monthly=1
+--pattern='+/home/*/.cache/yay' \
+--pattern='-/home/*/.cache' \
+"$REPOSITORY::{hostname}-{now:%Y%m%d-%H%M}" /home /etc /var/cache/pacman/pkg;
 
 # Capture Borg exit status
 BORG_EXIT=$?
 
 # Log backup status
 if [ $BORG_EXIT -eq 0 ]; then
-    echo "$(date '+%Y-%m-%d %H:%M:%S'): Backup successful" >> /var/log/backup.log
+    echo "$(date '+%Y-%m-%d %H:%M:%S'): Backup succeeded." 
 else
-    echo "$(date '+%Y-%m-%d %H:%M:%S'): Backup failed with error code $BORG_EXIT" >> /var/log/backup.log
+    echo "$(date '+%Y-%m-%d %H:%M:%S'): Backup failed with error code $BORG_EXIT."
+    exit 1
 fi
+
+sleep 3
+borg prune -v -s --list "$REPOSITORY" --keep-daily=7 --keep-weekly=4 --keep-monthly=3
+borg compact "$REPOSITORY"
+

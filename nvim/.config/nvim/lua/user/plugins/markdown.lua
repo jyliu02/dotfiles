@@ -54,8 +54,6 @@ return {
 
         return out
       end,
-
-      open_app_foreground = true,
     },
   },
 }

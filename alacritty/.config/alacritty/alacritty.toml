@@ -4,7 +4,7 @@ live_config_reload = true
 [font]
 normal = { family = "JetBrainsMono Nerd Font" }
 builtin_box_drawing = true
-size = 10.5
+size = 13.5
 
 [scrolling]
 history = 2000
@@ -19,4 +19,3 @@ args = [
 
 [window]
 dynamic_padding = true
-startup_mode = "Fullscreen"

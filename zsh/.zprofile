@@ -12,10 +12,8 @@ append_path $HOME/.local/share/nvim/mason/bin
 append_path $HOME/.local/scripts
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR="vim"
-else
-  export EDITOR="nvim"
-fi
+export EDITOR="nvim"
 
-. "$HOME/.cargo/env"
+if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
+    exec startx &>/dev/null
+fi

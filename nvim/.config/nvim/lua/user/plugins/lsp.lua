@@ -40,10 +40,11 @@ return {
                 runtime = { version = "LuaJIT" },
                 workspace = {
                   checkThirdParty = false,
-                  library = {
+                  library = vim.tbl_deep_extend("force", vim.api.nvim_get_runtime_file("", true), {
                     "${3rd}/luv/library",
-                    unpack(vim.api.nvim_get_runtime_file("", true)),
-                  },
+                    "/usr/share/awesome/lib",
+                    "/usr/share/lua",
+                  }),
                 },
                 diagnostics = { disable = { "missing-fields" } },
               },
