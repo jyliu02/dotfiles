@@ -94,3 +94,4 @@ alias vim=nvim
 source <(fzf --zsh)
 eval "$(zoxide init zsh)"
 
+export RANGER_LOAD_DEFAULT_RC=false

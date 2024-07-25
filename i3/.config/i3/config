@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Inter, JetBrainsMonoNerdFont 12
+font pango:Inter, JetBrainsMono NF 12
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -24,12 +24,12 @@ font pango:Inter, JetBrainsMonoNerdFont 12
 exec --no-startup-id dex --autostart --environment i3
 
 # set the wallpaper
-exec ~/.wallpapers/catalina/switcher.sh
+exec_always ~/.wallpapers/catalina/switcher.sh
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
-set $lockscreen i3lock --nofork -c 000000
+set $lockscreen i3lock --nofork -i ~/.wallpapers/lockscreen.png
 exec --no-startup-id xautolock -detectsleep -locker '$lockscreen'
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
@@ -245,22 +245,30 @@ client.background        $base
 
 # gaps
 gaps inner 8
-gaps outer 10
+gaps horizontal 8
+gaps vertical 6
 
 # window rules
-floating_minimum_size 0 x 0
 floating_maximum_size 1706 x 1066
 
-# title bar style
-# title_align center
-for_window [class=".*"] title_format "  %title", title_window_icon yes
+for_window [all] border none
+for_window [class="feh"] floating enable
+for_window [class="firefox"] move container to workspace number $ws2
+for_window [class="thunderbird"] move container to workspace number $ws3
+for_window [class="Anki"] move container to workspace number $ws4
+for_window [class="ticktick"] move container to workspace number $ws5
+for_window [class="Spotify"] move container to workspace number $ws6
 
-for_window [class="^(?i)(?!feh).*"] border none
-for_window [class="feh"] floating enable, border normal 1
+exec alacritty
+exec firefox
+exec anki
 
-exec --no-startup-id i3-msg 'exec alacritty'
-exec --no-startup-id sh -c "sleep 1; i3-msg 'workspace 2; exec firefox; workspace 1'"
-exec --no-startup-id sh -c "sleep 3; i3-msg 'workspace 3; exec thunderbird; workspace 1'"
+# these apps launch slowly
+exec --no-startup-id sh -c "sleep 1; i3-msg exec spotify-launcher"
+exec --no-startup-id sh -c "sleep 3; i3-msg exec thunderbird"
+exec --no-startup-id sh -c "sleep 5; i3-msg exec ticktick"
+
+focus_on_window_activation urgent
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -268,7 +276,7 @@ bar {
     position top
     status_command i3status
     tray_output none
-    padding 0 12 0 10
+    padding 0 15 0 10
 
     colors {
         background         $base

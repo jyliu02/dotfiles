@@ -14,6 +14,9 @@ return {
     keys = {
       { "<leader>u", "<cmd>UndotreeToggle<cr>" },
     },
+    config = function()
+      vim.g.undotree_SetFocusWhenToggle = 1
+    end,
   },
   {
     "nvim-pack/nvim-spectre",
