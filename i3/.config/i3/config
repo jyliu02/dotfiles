@@ -265,12 +265,12 @@ for_window [class="Spotify"] move container to workspace number $ws6
 
 exec alacritty
 exec firefox
-exec anki
+exec spotify-launcher
 
 # these apps launch slowly
-exec --no-startup-id sh -c "sleep 1; i3-msg exec spotify-launcher"
-exec --no-startup-id sh -c "sleep 3; i3-msg exec thunderbird"
-exec --no-startup-id sh -c "sleep 5; i3-msg exec ticktick"
+exec --no-startup-id sh -c "sleep 5; i3-msg exec anki"
+exec --no-startup-id sh -c "sleep 8; i3-msg exec thunderbird"
+exec --no-startup-id sh -c "sleep 15; i3-msg exec ticktick"
 
 focus_on_window_activation urgent
 
