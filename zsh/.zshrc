@@ -68,9 +68,6 @@ source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # User configuration
-eval "$(ssh-agent -s)" &> /dev/null
-ssh-add ~/.ssh/id_ed25519_github &> /dev/null
-
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

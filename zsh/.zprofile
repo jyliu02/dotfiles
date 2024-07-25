@@ -5,6 +5,7 @@ function append_path() {
 }
 
 export XDG_CONFIG_HOME=$HOME/.config
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 
 append_path $HOME/.local/bin
 append_path $HOME/go/bin
