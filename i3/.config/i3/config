@@ -24,13 +24,10 @@ font pango:Inter, JetBrainsMono NF 12
 exec --no-startup-id dex --autostart --environment i3
 
 # set the wallpaper
-exec_always ~/.wallpapers/catalina/switcher.sh
+exec --no-startup-id $HOME/.wallpapers/catalina/switcher.py
 
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
-set $lockscreen i3lock --nofork -i ~/.wallpapers/lockscreen.png
-exec --no-startup-id xautolock -detectsleep -locker '$lockscreen'
+set $lockscreen i3lock --nofork -i $HOME/.wallpapers/lockscreen.png
+exec --no-startup-id xautolock -detectsleep -corners '000+' -cornerdelay 3 -locker '$lockscreen'
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -46,8 +43,8 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # Use brightnessctl to adjust backlight of the moniter and the keyboard
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
-bindsym XF86KbdBrightnessUp exec --no-startup-id brightnessctl -d ':white:kbd_backlight' set +10%
-bindsym XF86KbdBrightnessDown exec --no-startup-id brightnessctl -d ':white:kbd_backlight' set 10%-
+bindsym XF86KbdBrightnessUp exec --no-startup-id brightnessctl -d '*kbd_backlight' set +10%
+bindsym XF86KbdBrightnessDown exec --no-startup-id brightnessctl -d '*kbd_backlight' set 10%-
 
 bindsym XF86AudioPlay exec --no-startup-id "playerctl play-pause"
 bindsym XF86AudioNext exec --no-startup-id "playerctl next"
@@ -128,16 +125,16 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: "
-set $ws2 "2: 󰈹"
-set $ws3 "3: 󰇮"
-set $ws4 "4: 󰘸"
-set $ws5 "5: 󰓇"
-set $ws6 "6: "
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+set $ws1 "1: "
+set $ws2 "2:󰈹 "
+set $ws3 "3:󰇮 "
+set $ws4 "4:󰘸 "
+set $ws5 "5:󰓇 "
+set $ws6 "6: "
+# set $ws7 "7"
+# set $ws8 "8"
+# set $ws9 "9"
+set $ws10 "10: "
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -146,9 +143,9 @@ bindsym $mod+3 workspace number $ws3
 bindsym $mod+4 workspace number $ws4
 bindsym $mod+5 workspace number $ws5
 bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
+# bindsym $mod+7 workspace number $ws7
+# bindsym $mod+8 workspace number $ws8
+# bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
 # move focused container to workspace
@@ -158,9 +155,9 @@ bindsym $mod+Shift+3 move container to workspace number $ws3
 bindsym $mod+Shift+4 move container to workspace number $ws4
 bindsym $mod+Shift+5 move container to workspace number $ws5
 bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
+# bindsym $mod+Shift+7 move container to workspace number $ws7
+# bindsym $mod+Shift+8 move container to workspace number $ws8
+# bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 bindsym $mod+Tab workspace back_and_forth
@@ -206,16 +203,11 @@ bindsym $mod+r mode "resize"
 
 bindsym $mod+p mode "screenshot"
 mode "screenshot" {
-        set $dir "$HOME/Pictures/Screenshots/$(date +%s).png"
+        set $path "$HOME/Pictures/Screenshots/$(date +%s).png"
 
-        bindsym s exec --no-startup-id maim --select -u $dir, mode "default"
-        bindsym Shift+s exec --no-startup-id maim --select | xlip -selection clipboard -t image/png, mode "default"
-
-        bindsym w exec --no-startup-id maim -i $(xdotool getactivewindow) -u $dir, mode "default"
-        bindsym Shift+w exec --no-startup-id maim -i $(xdotool getactivewindow) | xlip -selection clipboard -t image/png, mode "default"
-
-        bindsym Return exec --no-startup-id maim -u $dir, mode "default"
-        bindsym Shift+Return exec --no-startup-id maim | xclip -selection clipboard -t image/png, mode "default"
+        bindsym s exec --no-startup-id maim -s -u $path, mode "default"
+        bindsym w exec --no-startup-id maim -i $(xdo id) -u $path, mode "default"
+        bindsym Return exec --no-startup-id maim -u $path, mode "default"
 
         bindsym Escape mode "default"
         bindsym $mod+p mode "default"
@@ -233,7 +225,9 @@ mode "switch" {
     # music
     bindsym u workspace number $ws5, mode "default"
     # note 
-    bindsym w workspace number $ws6, mode "default"
+    bindsym j workspace number $ws6, mode "default"
+    # gaming 
+    bindsym g workspace number $ws10, mode "default"
 
     bindsym Escape mode "default"
     bindsym $mod+space mode "default"
@@ -288,22 +282,25 @@ gaps horizontal 8
 gaps vertical 6
 
 # window rules
-floating_maximum_size 1706 x 1066
+# floating_maximum_size 1706 x 1066
 
 for_window [all] border none
 for_window [class="feh"] floating enable
 for_window [class="firefox"] move container to workspace number $ws2
 for_window [class="thunderbird"] move container to workspace number $ws3
 for_window [class="Anki"] move container to workspace number $ws4
+for_window [class="GoldenDict-ng"] move container to workspace number $ws4
 for_window [class="Spotify"] move container to workspace number $ws5
 for_window [class="obsidian"] move container to workspace number $ws6
+for_window [class="steam"] move container to workspace number $ws10
 
 exec alacritty
 exec firefox
-exec spotify-launcher
-exec anki
 exec thunderbird
+exec anki
+exec goldendict
 exec obsidian
+exec spotify-launcher
 
 focus_on_window_activation urgent
 
@@ -313,7 +310,7 @@ bar {
     position top
     status_command i3status
     tray_output none
-    padding 0 18 0 5
+    padding 0 20 0 15
     strip_workspace_numbers yes
 
     colors {

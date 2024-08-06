@@ -4,13 +4,12 @@ function append_path() {
     fi
 }
 
-export XDG_CONFIG_HOME=$HOME/.config
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 
 append_path $HOME/.local/bin
-append_path $HOME/go/bin
-append_path $HOME/.local/share/nvim/mason/bin
 append_path $HOME/.local/scripts
+append_path $HOME/.local/share/nvim/mason/bin
+append_path $HOME/go/bin
 
 # Preferred editor for local and remote sessions
 export EDITOR="nvim"
