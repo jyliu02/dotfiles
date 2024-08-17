@@ -42,8 +42,6 @@ return {
                   checkThirdParty = false,
                   library = vim.tbl_deep_extend("force", vim.api.nvim_get_runtime_file("", true), {
                     "${3rd}/luv/library",
-                    "/usr/share/awesome/lib",
-                    "/usr/share/lua",
                   }),
                 },
                 diagnostics = { disable = { "missing-fields" } },
@@ -75,6 +73,7 @@ return {
     opts = {
       formatters_by_ft = {
         lua = { "stylua" },
+        python = { "autopep8" },
         markdown = { "prettier" },
         html = { "prettier" },
       },

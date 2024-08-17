@@ -13,7 +13,7 @@ trap 'sleep 1s; kill %%; exit 0' TERM
 MAX_BRIGHTNESS=$(brightnessctl max)
 DIM_BRIGHTNESS=$(awk -v b="$BRIGHTNESS" -v max="$MAX_BRIGHTNESS" \
   'BEGIN { min = 0.1 * max; if (b < min) min = b; \
-   dim = b - 0.2 * max; if (dim < min) dim = min; \
+   dim = b - 0.15 * max; if (dim < min) dim = min; \
    print dim }')
 brightnessctl set $DIM_BRIGHTNESS &
 wait
