@@ -2,10 +2,7 @@
 
 REPOSITORY="/mnt/backup/repo"
 
-pacman -Qqen > /etc/pkglist.txt
-pacman -Qqem > /etc/pkglist_aur.txt
-
-borg create -v --progress --compression zstd \
+borg create -v --progress --compression zstd,6 \
 --exclude='/dev/*' \
 --exclude='/proc/*' \
 --exclude='/sys/*' \
@@ -13,6 +10,8 @@ borg create -v --progress --compression zstd \
 --exclude='/run/*' \
 --exclude='/tmp/*' \
 --exclude='/lost+found/' \
+--pattern='+/home/*/.cache/yay' \
+--pattern='-/home/*/.cache/*' \
 "$REPOSITORY::{hostname}-{now:%Y%m%d-%H%M}" /;
 
 # Capture Borg exit status
