@@ -6,12 +6,14 @@ pacman -Qqen > /etc/pkglist.txt
 pacman -Qqem > /etc/pkglist_aur.txt
 
 borg create -v --progress --compression zstd \
---pattern='+/home/*/.cache/yay' \
---pattern='+/var/cache/pacman/pkg' \
---pattern='-/home/*/.cache' \
---pattern='-/root/.cache' \
---pattern='-/var/cache' \
-"$REPOSITORY::{hostname}-{now:%Y%m%d-%H%M}" /root /home /usr /etc /var;
+--exclude='/dev/*' \
+--exclude='/proc/*' \
+--exclude='/sys/*' \
+--exclude='/mnt/*' \
+--exclude='/run/*' \
+--exclude='/tmp/*' \
+--exclude='/lost+found/' \
+"$REPOSITORY::{hostname}-{now:%Y%m%d-%H%M}" /;
 
 # Capture Borg exit status
 BORG_EXIT=$?

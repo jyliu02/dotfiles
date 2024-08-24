@@ -74,6 +74,7 @@ return {
       formatters_by_ft = {
         lua = { "stylua" },
         python = { "autopep8" },
+        cpp = { "clang-format" },
         markdown = { "prettier" },
         html = { "prettier" },
       },

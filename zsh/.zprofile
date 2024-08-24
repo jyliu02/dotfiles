@@ -17,6 +17,3 @@ export EDITOR="nvim"
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
     exec startx &>/dev/null
 fi
-
-export CC=clang
-export CXX=clang++
