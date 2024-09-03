@@ -1,12 +1,18 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 # Path to your Oh My Zsh installation.
 export ZSH="/usr/share/oh-my-zsh/"
+
+ZSH_THEME=""
+
+autoload -U promptinit; promptinit
+prompt pure
+zstyle :prompt:pure:git:stash show yes
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -68,8 +74,8 @@ source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # User configuration
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-[[ ! -f /etc/p10k.zsh ]] || source /etc/p10k.zsh
+# source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+# [[ ! -f /etc/p10k.zsh ]] || source /etc/p10k.zsh
 
 alias grep=rg
 alias vim=nvim
@@ -77,5 +83,3 @@ alias vim=nvim
 # load other tools
 source <(fzf --zsh)
 eval "$(zoxide init zsh)"
-
-export RANGER_LOAD_DEFAULT_RC=false
