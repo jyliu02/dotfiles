@@ -8,11 +8,7 @@
 # Path to your Oh My Zsh installation.
 export ZSH="/usr/share/oh-my-zsh/"
 
-ZSH_THEME=""
-
-autoload -U promptinit; promptinit
-prompt pure
-zstyle :prompt:pure:git:stash show yes
+ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
