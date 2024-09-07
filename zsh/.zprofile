@@ -19,7 +19,4 @@ if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
     exec startx &>/dev/null
 fi
 
-# Created by `pipx` on 2024-08-26 00:50:59
-export PATH="$PATH:/home/aubreyliu/.local/bin"
-
 export RANGER_LOAD_DEFAULT_RC=false

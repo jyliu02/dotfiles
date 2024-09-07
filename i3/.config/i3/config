@@ -270,13 +270,12 @@ for_window [class="obsidian"] move container to workspace number $ws6
 for_window [class="discord"] move container to workspace number $ws9
 for_window [class="steam"] move container to workspace number $ws10
 
-exec alacritty
-exec thorium-browser
-exec thunderbird
-exec anki
-exec obsidian
-exec spotify-launcher
-
-focus_on_window_activation urgent
+exec --no-startup-id alacritty
+exec --no-startup-id thorium-browser
+exec --no-startup-id thunderbird
+exec --no-startup-id anki
+exec --no-startup-id goldendict
+exec --no-startup-id obsidian
+exec --no-startup-id spotify-launcher
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
