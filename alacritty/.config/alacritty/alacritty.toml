@@ -2,7 +2,7 @@ import = ["~/.config/alacritty/themes/catppuccin-mocha.toml"]
 live_config_reload = true
 
 [font]
-size = 13
+size = 15
 
 [font.normal]
 family = "JetBrainsMono NF"
