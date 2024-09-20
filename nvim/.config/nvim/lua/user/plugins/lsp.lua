@@ -25,7 +25,9 @@ return {
       end
 
       require("mason").setup()
-      require("mason-lspconfig").setup()
+      require("mason-lspconfig").setup({
+        ensure_installed = { "lua_ls", "clangd" },
+      })
       require("mason-lspconfig").setup_handlers({
         function(server_name)
           require("lspconfig")[server_name].setup({
@@ -69,7 +71,19 @@ return {
   },
   {
     "stevearc/conform.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "mason.nvim" },
+    lazy = true,
+    cmd = "ConformInfo",
+    keys = {
+      {
+        "<leader>cf",
+        function()
+          require("conform").format()
+        end,
+        mode = { "n", "v" },
+        desc = "Format",
+      },
+    },
     opts = {
       formatters_by_ft = {
         lua = { "stylua" },
@@ -78,9 +92,11 @@ return {
         markdown = { "prettier" },
         html = { "prettier" },
       },
-      format_on_save = {
-        timeout_ms = 2000,
-        lsp_format = "fallback",
+      default_format_opts = {
+        timeout_ms = 3000,
+        async = false, -- not recommended to change
+        quiet = false, -- not recommended to change
+        lsp_format = "fallback", -- not recommended to change
       },
     },
   },
