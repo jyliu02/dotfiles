@@ -1,15 +1,5 @@
 return {
   {
-    "backdround/global-note.nvim",
-    keys = {
-      { "<leader>w", "<cmd>GlobalNote<cr>" },
-    },
-    opts = {
-      filename = "homepage.md",
-      directory = vim.fn.expand("~") .. "/Documents/Notes",
-    },
-  },
-  {
     "epwalsh/obsidian.nvim",
     event = {
       "BufReadPre " .. vim.fn.expand("~") .. "/Documents/Notes/**.md",
