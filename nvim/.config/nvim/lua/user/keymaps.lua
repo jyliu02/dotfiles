@@ -12,7 +12,7 @@ vim.keymap.set({ "n", "v" }, "<C-w>+", "<C-w>10+")
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
-vim.keymap.set("n", "J", "mzJ`z") -- Join lines and keep cursor in the original place.
+vim.keymap.set("n", "J", "mzJ'z") -- Join lines and keep cursor in the original place.
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
