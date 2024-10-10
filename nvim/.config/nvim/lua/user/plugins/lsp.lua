@@ -89,7 +89,6 @@ return {
         lua = { "stylua" },
         python = { "autopep8" },
         cpp = { "clang-format" },
-        markdown = { "prettier" },
         html = { "prettier" },
       },
       default_format_opts = {

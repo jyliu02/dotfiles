@@ -1,9 +1,11 @@
 vim.o.conceallevel = 2
-vim.o.shiftwidth = 2
+vim.o.tabstop = 4
+vim.o.expandtab = false
 vim.o.textwidth = 100
-vim.o.colorcolumn = "+1"
+vim.o.wrap = true
+vim.o.wrapmargin = 0
+vim.o.linebreak = true
+vim.o.showbreak = "> "
 
-vim.keymap.set("n", "<leader>gw", function()
-  vim.cmd("normal! mzggVGgw'z")
-  require("conform").format()
-end)
+vim.keymap.set({"n", "v"}, "j", "gj")
+vim.keymap.set({"n", "v"}, "k", "gk")
