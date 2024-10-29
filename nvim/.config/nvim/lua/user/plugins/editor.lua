@@ -1,4 +1,5 @@
 return {
+  { "tpope/vim-sleuth" },
   { "nvim-tree/nvim-web-devicons" },
   {
     "echasnovski/mini.nvim",
