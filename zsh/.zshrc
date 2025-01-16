@@ -113,8 +113,3 @@ eval "$(zoxide init zsh)"
 
 # Set up the starship prompt
 eval "$(starship init zsh)"
-
-# >>>> Vagrant command completion (start)
-fpath=(/opt/vagrant/embedded/gems/gems/vagrant-2.4.1/contrib/zsh $fpath)
-compinit
-# <<<<  Vagrant command completion (end)
