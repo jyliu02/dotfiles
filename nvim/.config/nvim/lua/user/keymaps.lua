@@ -4,9 +4,6 @@ vim.g.mapleader = " "
 
 vim.keymap.set({ "n", "i" }, "<Esc>", "<cmd>noh<cr><esc>") -- Clear search highlights
 
-vim.keymap.set({ "n", "v" }, "j", "gj")
-vim.keymap.set({ "n", "v" }, "k", "gk")
-
 vim.keymap.set({ "n", "v" }, "<C-w>>", "<C-w>10>")
 vim.keymap.set({ "n", "v" }, "<C-w><", "<C-w>10<")
 vim.keymap.set({ "n", "v" }, "<C-w>-", "<C-w>10-")

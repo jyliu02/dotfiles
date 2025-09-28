@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME=""
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -70,9 +70,7 @@ ZSH_THEME=""
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-    zsh-syntax-highlighting
-)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -81,7 +79,7 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-export LANG=en_US.UTF-8
+# export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -89,10 +87,9 @@ export LANG=en_US.UTF-8
 # else
 #   export EDITOR='nvim'
 # fi
-export EDITOR=nvim
 
 # Compilation flags
-export ARCHFLAGS="-arch $(uname -m)"
+# export ARCHFLAGS="-arch $(uname -m)"
 
 # Set personal aliases, overriding those provided by Oh My Zsh libs,
 # plugins, and themes. Aliases can be placed here, though Oh My Zsh
@@ -105,12 +102,36 @@ export ARCHFLAGS="-arch $(uname -m)"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias grep="rg -i"
 
-eval "$(ssh-agent -s)" > /dev/null 2>&1
-ssh-add --apple-use-keychain ~/.ssh/id_ed25519 > /dev/null 2>&1
+export PATH="$PATH:$(go env GOPATH)/bin" # go-env
+
+case "$(uname -s)" in
+   Darwin)
+    # Set up ssh key forwarding
+    eval "$(ssh-agent -s)" > /dev/null 2>&1
+    ssh-add --apple-use-keychain ~/.ssh/id_ed25519 > /dev/null 2>&1
+    ;;
+   Linux)
+     # This is Linux
+     ;;
+   *)
+     # This is another operating system
+     ;;
+esac
+
+[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
 
 # Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
+if command -v fzf &> /dev/null; then
+  source <(fzf --zsh)
+else
+  echo "fzf is not installed"
+fi
 
-# Set up the starship prompt
-eval "$(starship init zsh)"
+# Set up starship shell prompt
+if command -v starship &> /dev/null; then
+  eval "$(starship init zsh)"
+else
+  echo "starship is not installed"
+fi
