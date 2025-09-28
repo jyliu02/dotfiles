@@ -1,3 +1,5 @@
+# Usage: make [target] V=-v
+
 # Default target: restow all dotfile packages
 .PHONY: all
 all: restow
@@ -5,30 +7,27 @@ all: restow
 # List all stow packages (directories, excluding .git and files)
 PACKAGES := $(filter-out .git,$(filter-out Makefile,$(wildcard */)))
 
-# Stow all packages
+# Allow passing flags to stow via V variable
+STOW_FLAGS ?=
+
 .PHONY: stow
 stow:
-	stow $(PACKAGES)
+	stow $(STOW_FLAGS) $(PACKAGES)
 
-# Restow all packages (unstow then stow)
 .PHONY: restow
 restow:
-	stow --restow $(PACKAGES)
+	stow $(STOW_FLAGS) --restow $(PACKAGES)
 
-# Unstow all packages
 .PHONY: unstow
 unstow:
-	stow --delete $(PACKAGES)
+	stow $(STOW_FLAGS) --delete $(PACKAGES)
 
-# Stow a specific package: make stow-PACKAGE (e.g., make stow-zsh)
 stow-%:
-	stow $*
+	stow $(STOW_FLAGS) $*
 
-# Unstow a specific package: make unstow-PACKAGE
 unstow-%:
-	stow --delete $*
+	stow $(STOW_FLAGS) --delete $*
 
-# Restow a specific package: make restow-PACKAGE
 restow-%:
-	stow --restow $*
+	stow $(STOW_FLAGS) --restow $*
 
