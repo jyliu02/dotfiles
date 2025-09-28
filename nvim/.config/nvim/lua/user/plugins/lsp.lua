@@ -65,16 +65,16 @@ return {
     dependencies = { "mason.nvim" },
     lazy = true,
     cmd = "ConformInfo",
-    keys = {
-      {
-        "<leader>cf",
-        function()
-          require("conform").format()
-        end,
-        mode = { "n", "v" },
-        desc = "Format",
-      },
-    },
+    -- keys = {
+    --   {
+    --     "<leader>cf",
+    --     function()
+    --       require("conform").format()
+    --     end,
+    --     mode = { "n", "v" },
+    --     desc = "Format",
+    --   },
+    -- },
     opts = {
       formatters_by_ft = {
         lua = { "stylua" },
@@ -83,11 +83,10 @@ return {
         html = { "prettier" },
         rust = { "rustfmt", lsp_format = "fallback" },
       },
-      default_format_opts = {
-        timeout_ms = 3000,
-        async = false,           -- not recommended to change
-        quiet = false,           -- not recommended to change
-        lsp_format = "fallback", -- not recommended to change
+      format_on_save = {
+        -- These options will be passed to conform.format()
+        timeout_ms = 1000,
+        lsp_format = "fallback",
       },
     },
   },

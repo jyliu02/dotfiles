@@ -31,3 +31,14 @@ unstow-%:
 restow-%:
 	stow $(STOW_FLAGS) --restow $*
 
+.PHONY: deps-macos
+deps-macos:
+	brew install stow zsh fzf git neovim tmux ripgrep bat htop starship fd exa python node curl wget zoxide the_silver_searcher
+
+.PHONY: deps-fedora
+deps-fedora:
+	sudo dnf install -y stow zsh fzf git neovim tmux ripgrep bat htop starship fd-find exa python3 nodejs npm curl wget zoxide the_silver_searcher
+
+.PHONY: deps-arch
+deps-arch:
+	sudo pacman -Syu --needed stow zsh fzf git neovim tmux ripgrep bat htop starship fd exa python nodejs npm curl wget zoxide the_silver_searcher
