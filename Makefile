@@ -33,12 +33,15 @@ restow-%:
 
 .PHONY: deps-macos
 deps-macos:
-	brew install stow zsh fzf git neovim tmux ripgrep bat htop starship fd exa python node curl wget zoxide the_silver_searcher
+	brew install stow zsh fzf git neovim tmux ripgrep bat htop fd exa python node curl wget zoxide
+	curl -sS https://starship.rs/install.sh | sh
 
 .PHONY: deps-fedora
 deps-fedora:
-	sudo dnf install -y stow zsh fzf git neovim tmux ripgrep bat htop starship fd-find exa python3 nodejs npm curl wget zoxide the_silver_searcher
+	sudo dnf install -y stow zsh fzf git neovim tmux ripgrep bat htop fd-find python3 nodejs npm curl wget zoxide
+	curl -sS https://starship.rs/install.sh | sh
 
 .PHONY: deps-arch
 deps-arch:
-	sudo pacman -Syu --needed stow zsh fzf git neovim tmux ripgrep bat htop starship fd exa python nodejs npm curl wget zoxide the_silver_searcher
+	sudo pacman -Syu --needed stow zsh fzf git neovim tmux ripgrep bat htop fd python nodejs npm curl wget zoxide
+	curl -sS https://starship.rs/install.sh | sh
