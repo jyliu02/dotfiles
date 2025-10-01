@@ -2,38 +2,40 @@
 
 # Default target: restow all dotfile packages
 .PHONY: all
-all: restow
+all: git-submodules-sync restow
 
 # List all stow packages (directories, excluding .git and files)
 PACKAGES := $(filter-out .git,$(filter-out Makefile,$(wildcard */)))
 
-# Allow passing flags to stow via V variable
-STOW_FLAGS ?=
-
 .PHONY: stow
 stow:
-	stow $(STOW_FLAGS) $(PACKAGES)
+	stow $(PACKAGES)
 
 .PHONY: restow
 restow:
-	stow $(STOW_FLAGS) --restow $(PACKAGES)
+	stow --restow $(PACKAGES)
 
 .PHONY: unstow
 unstow:
-	stow $(STOW_FLAGS) --delete $(PACKAGES)
+	stow --delete $(PACKAGES)
 
 stow-%:
-	stow $(STOW_FLAGS) $*
+	stow $*
 
 unstow-%:
-	stow $(STOW_FLAGS) --delete $*
+	stow --delete $*
 
 restow-%:
-	stow $(STOW_FLAGS) --restow $*
+	stow --restow $*
+
+.PHONY: git-submodules-sync
+git-submodules-sync:
+	git submodule init
+	git submodule update --remote --recursive
 
 .PHONY: deps-macos
 deps-macos:
-	brew install stow zsh fzf git neovim tmux ripgrep bat htop fd exa python node curl wget zoxide
+	brew install stow zsh fzf git neovim tmux ripgrep bat htop fd python node curl wget zoxide reattach-to-user-namespace
 	curl -sS https://starship.rs/install.sh | sh
 
 .PHONY: deps-fedora
