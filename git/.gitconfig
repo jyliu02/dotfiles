@@ -2,3 +2,6 @@
 [user]
 	name = Junyu Liu
 	email = 72335144+jyliu02@users.noreply.github.com
+
+[diff]
+	ignoreSubmodules = dirty
