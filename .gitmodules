@@ -13,3 +13,6 @@
 [submodule "tmux/.tmux/plugins/tmux"]
 	path = tmux/.tmux/plugins/tmux
 	url = git@github.com:catppuccin/tmux.git
+[submodule "tmux/.tmux/plugins/tmux-yank"]
+	path = tmux/.tmux/plugins/tmux-yank
+	url = git@github.com:tmux-plugins/tmux-yank.git
