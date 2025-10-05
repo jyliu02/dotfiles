@@ -44,9 +44,9 @@ borg prune                          \
     --list                          \
     --glob-archives '{hostname}-*'  \
     --show-rc                       \
-    --keep-daily    7               \
-    --keep-weekly   4               \
-    --keep-monthly  6
+    --keep-daily    5               \
+    --keep-weekly   3               \
+    --keep-monthly  2
 
 prune_exit=$?
 
