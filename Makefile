@@ -47,3 +47,15 @@ deps-fedora:
 deps-arch:
 	sudo pacman -Syu --needed stow zsh fzf git neovim tmux ripgrep bat htop fd python nodejs npm curl wget zoxide
 	curl -sS https://starship.rs/install.sh | sh
+
+.PHONY: cron-install
+cron-install:
+	crontab cron/crontab
+
+.PHONY: cron-backup
+cron-backup:
+	crontab -l > cron/crontab || true
+
+.PHONY: cron-remove
+cron-remove:
+	crontab -r
