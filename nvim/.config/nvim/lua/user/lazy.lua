@@ -19,14 +19,6 @@ require("lazy").setup("user.plugins", {
   defaults = {
     version = false, -- always use the latest git commit
   },
-  change_detection = {
-    enabled = true,
-    notify = false,
-  },
-  checker = { -- automatically check for plugin updates
-    enabled = true,
-    notify = false,
-  },
   rocks = {
     enabled = false,
   },

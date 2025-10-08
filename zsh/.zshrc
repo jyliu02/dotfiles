@@ -81,12 +81,7 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
+export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
@@ -107,30 +102,32 @@ alias grep="rg -i"
 export PATH="$PATH:$(go env GOPATH)/bin" # go-env
 
 case "$(uname -s)" in
-   Darwin)
-    # Set up ssh key forwarding
-    eval "$(ssh-agent -s)" > /dev/null 2>&1
-    ssh-add --apple-use-keychain ~/.ssh/id_ed25519 > /dev/null 2>&1
-    ;;
-   Linux)
-     # This is Linux
-     ;;
-   *)
-     # This is another operating system
-     ;;
+Darwin)
+  # Set up ssh key forwarding
+  eval "$(ssh-agent -s)" >/dev/null 2>&1
+  ssh-add --apple-use-keychain ~/.ssh/id_ed25519 >/dev/null 2>&1
+  ;;
+Linux)
+  # This is Linux
+  ;;
+*)
+  # This is another operating system
+  ;;
 esac
 
 [ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
 
 # Set up fzf key bindings and fuzzy completion
-if command -v fzf &> /dev/null; then
+if command -v fzf &>/dev/null; then
   source <(fzf --zsh)
 else
   echo "fzf is not installed"
 fi
 
+[ -f "$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
 # Set up starship shell prompt
-if command -v starship &> /dev/null; then
+if command -v starship &>/dev/null; then
   eval "$(starship init zsh)"
 else
   echo "starship is not installed"

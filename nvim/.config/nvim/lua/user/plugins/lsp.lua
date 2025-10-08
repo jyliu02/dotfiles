@@ -82,6 +82,9 @@ return {
         cpp = { "clang-format" },
         html = { "prettier" },
         rust = { "rustfmt", lsp_format = "fallback" },
+        sh = { "shfmt" },
+        bash = { "shfmt" },
+        zsh = { "shfmt" },
       },
       format_on_save = {
         -- These options will be passed to conform.format()
