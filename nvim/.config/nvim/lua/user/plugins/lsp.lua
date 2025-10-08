@@ -7,10 +7,10 @@ return {
       { "neovim/nvim-lspconfig" },
       { "williamboman/mason.nvim" },
       -- lsp progress
-      { "j-hui/fidget.nvim",      opts = { progress = { display = { render_limit = 8 } } } },
+      { "j-hui/fidget.nvim", opts = { progress = { display = { render_limit = 8 } } } },
     },
     config = function()
-      vim.api.nvim_create_autocmd('LspAttach', {
+      vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
           -- <C-w>d is the default mapping for viewing diagnostic under cursor
           vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
@@ -24,7 +24,7 @@ return {
         end,
       })
 
-      vim.lsp.config('lua_ls', {
+      vim.lsp.config("lua_ls", {
         settings = {
           Lua = {
             runtime = { version = "LuaJIT" },
@@ -36,27 +36,31 @@ return {
             },
             diagnostics = { disable = { "missing-fields" } },
           },
-        }
+        },
       })
 
-      vim.lsp.config('rust_analyzer',
-        {
-          settings = {
-            ["rust-analyzer"] = {
-              check = {
-                allTargets = false,
-              },
-              cargo = {
-                features = "all",
-              },
+      vim.lsp.config("rust_analyzer", {
+        settings = {
+          ["rust-analyzer"] = {
+            check = {
+              allTargets = false,
             },
-          }
-        }
-      )
+            cargo = {
+              features = "all",
+            },
+          },
+        },
+      })
 
       require("mason").setup()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "rust_analyzer" },
+        ensure_installed = {
+          "lua_ls",
+          "rust_analyzer",
+          "clangd",
+          "pyright",
+          "gopls",
+        },
       })
     end,
   },
@@ -80,7 +84,10 @@ return {
         lua = { "stylua" },
         python = { "autopep8" },
         cpp = { "clang-format" },
-        html = { "prettier" },
+        html = { "prettierd", "prettier" },
+        javascript = { "prettierd", "prettier" },
+        css = { "prettierd", "prettier" },
+        json = { "prettierd", "prettier" },
         rust = { "rustfmt", lsp_format = "fallback" },
         sh = { "shfmt" },
         bash = { "shfmt" },
@@ -88,8 +95,8 @@ return {
       },
       format_on_save = {
         -- These options will be passed to conform.format()
-        timeout_ms = 1000,
         lsp_format = "fallback",
+        timeout_ms = 1000,
       },
     },
   },

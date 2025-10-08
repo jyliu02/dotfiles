@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
 # Setting this, so the repo does not need to be given on the commandline:
-export BORG_REPO=jyliu@jyliu-macbook-pro:/~/Backups/Linux
+export BORG_REPO='jyliu@jyliu-macbook-pro:/~/Backups/Linux'
 
 # See the section "Passphrase notes" for more infos.
 export BORG_PASSPHRASE='buttery03tip85Alien'
