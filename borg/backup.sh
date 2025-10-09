@@ -1,12 +1,16 @@
 #!/bin/sh
 
 # Setting this, so the repo does not need to be given on the commandline:
-export BORG_REPO='jyliu@jyliu-macbook-pro:/~/Backups/Linux'
+export BORG_REPO='/mnt/disk1/backup/main'
 
 # See the section "Passphrase notes" for more infos.
 export BORG_PASSPHRASE='buttery03tip85Alien'
 
-BORG_REMOTE_PATH='--remote-path /opt/homebrew/bin/borg'
+# Generate the list of user explicitly installed packages
+dnf repoquery --qf "%{name}\n" --userinstalled >~/pkglist.txt
+
+# Dump cron jobs to a file
+crontab -l >~/crontab.txt
 
 # some helpers and error handling:
 info() { printf "\n%s %s\n\n" "$(date)" "$*" >&2; }
@@ -18,7 +22,6 @@ info "Starting backup"
 # the machine this script is currently running on:
 
 borg create \
-    ${BORG_REMOTE_PATH} \
     --verbose \
     --filter AME \
     --list \
@@ -40,13 +43,13 @@ info "Pruning repository"
 # other machines' archives also:
 
 borg prune \
-    ${BORG_REMOTE_PATH} \
     --list \
     --glob-archives '{hostname}-*' \
     --show-rc \
-    --keep-daily 5 \
-    --keep-weekly 3 \
-    --keep-monthly 2
+    --keep-hourly 24 \
+    --keep-daily 7 \
+    --keep-weekly 4 \
+    --keep-monthly 3
 
 prune_exit=$?
 
@@ -54,7 +57,7 @@ prune_exit=$?
 
 info "Compacting repository"
 
-borg ${BORG_REMOTE_PATH} compact
+borg compact
 
 compact_exit=$?
 
