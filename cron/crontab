@@ -1,5 +1,0 @@
-# Managed by dotfiles - do not edit directly
-# Use 'make cron-install' to apply changes
-
-# Daily backup at 11 PM
-0 23 * * * sh ~/backup.sh
