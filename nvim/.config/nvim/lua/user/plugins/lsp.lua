@@ -83,20 +83,24 @@ return {
       formatters_by_ft = {
         lua = { "stylua" },
         python = { "autopep8" },
+        c = { "clang-format" },
         cpp = { "clang-format" },
         html = { "prettierd", "prettier" },
         javascript = { "prettierd", "prettier" },
         css = { "prettierd", "prettier" },
         json = { "prettierd", "prettier" },
-        rust = { "rustfmt", lsp_format = "fallback" },
         sh = { "shfmt" },
-        bash = { "shfmt" },
-        zsh = { "shfmt" },
       },
       format_on_save = {
         -- These options will be passed to conform.format()
         lsp_format = "fallback",
         timeout_ms = 1000,
+      },
+      default_format_opts = {
+        timeout_ms = 3000,
+        async = false, -- not recommended to change
+        quiet = false, -- not recommended to change
+        lsp_format = "fallback", -- not recommended to change
       },
     },
   },
