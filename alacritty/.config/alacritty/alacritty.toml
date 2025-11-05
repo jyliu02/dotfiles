@@ -18,7 +18,7 @@ family = "JetBrainsMono NF"
 style = "Italic"
 
 [scrolling]
-history = 5000
+history = 10000
 
 [terminal.shell]
 program = "/bin/zsh"
