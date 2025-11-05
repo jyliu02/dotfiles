@@ -115,7 +115,6 @@ Linux)
   ;;
 esac
 
-[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
 
 # Set up fzf key bindings and fuzzy completion
 if command -v fzf &>/dev/null; then
@@ -132,3 +131,5 @@ if command -v starship &>/dev/null; then
 else
   echo "starship is not installed"
 fi
+
+[ -f "/Users/jyliu/.ghcup/env" ] && . "/Users/jyliu/.ghcup/env" # ghcup-env
