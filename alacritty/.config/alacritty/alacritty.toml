@@ -30,8 +30,10 @@ args = [
 
 [window]
 dynamic_padding = true
-startup_mode = "Fullscreen"
-option_as_alt = "OnlyLeft"
+startup_mode = "Windowed"
+opacity = 0.8
+blur = true
+option_as_alt = "Both"
 
 [general]
 live_config_reload = true
