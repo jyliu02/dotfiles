@@ -30,8 +30,8 @@ restow-%:
 
 .PHONY: git-submodules-sync
 git-submodules-sync:
-	git submodule update --init --recursive
-	git submodule update --remote --recursive
+	git submodule update --init --recursive --depth 1
+	git submodule update --remote --recursive --depth 1
 
 .PHONY: deps-macos
 deps-macos:
