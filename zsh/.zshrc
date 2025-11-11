@@ -17,19 +17,19 @@ ZSH_THEME="robbyrussell"
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+CASE_SENSITIVE="false"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
 # zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
+zstyle ':omz:update' frequency 30
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -62,9 +62,6 @@ ZSH_THEME="robbyrussell"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-# Enable zsh-autocomplete plugin
-source $HOME/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -82,8 +79,7 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
+export LANG=en_US.UTF-8
 export EDITOR='nvim'
 
 # Compilation flags
@@ -100,7 +96,6 @@ export EDITOR='nvim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias grep="rg -i"
 alias ts="./tmux-sessionizer"
 
 export PATH="$PATH:$(go env GOPATH)/bin" # go-env
@@ -127,6 +122,7 @@ else
   echo "fzf is not installed"
 fi
 
+[ -f "$HOME/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$HOME/zsh-autosuggestions/zsh-autosuggestions.zsh"
 [ -f "$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # Set up starship shell prompt
