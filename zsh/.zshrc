@@ -125,6 +125,8 @@ fi
 [ -f "$HOME/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source "$HOME/zsh-autosuggestions/zsh-autosuggestions.zsh"
 [ -f "$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] && source "$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
+eval "$(zoxide init zsh)"
+
 # Set up starship shell prompt
 if command -v starship &>/dev/null; then
   eval "$(starship init zsh)"
