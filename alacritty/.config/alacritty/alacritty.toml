@@ -20,14 +20,6 @@ style = "Italic"
 [scrolling]
 history = 10000
 
-[terminal.shell]
-program = "/bin/zsh"
-args = [
-    "-l",
-    "-c",
-    "tmux new-session -A -s main",
-]
-
 [window]
 dynamic_padding = true
 startup_mode = "Windowed"
