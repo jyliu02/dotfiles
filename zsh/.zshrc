@@ -96,6 +96,8 @@ export EDITOR='nvim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias grep="grep -inH --color=auto"
+alias ls="ls -GFh --color=auto"
 alias ts="./tmux-sessionizer"
 
 export PATH="$PATH:$(go env GOPATH)/bin" # go-env
